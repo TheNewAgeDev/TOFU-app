@@ -1,12 +1,12 @@
 import { StyleSheet, View, Text, TextInput } from "react-native";
-import Ionicons from "@expo/vector-icons/FontAwesome";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export default function Field({ label, icon, secureTextEntry }) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.inputBox}>
-        <Ionicons
+        <FontAwesome
           name={icon}
           color="gray"
           size={22}
