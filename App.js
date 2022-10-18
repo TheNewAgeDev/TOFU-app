@@ -4,15 +4,20 @@ import { Provider as StoreProvider } from 'react-redux'
 import { StatusBar } from 'expo-status-bar'
 import Constants from 'expo-constants'
 
+import useTheme from 'hooks/useTheme'
+
 import Navigation from '#/navigation'
 import store from '#/store'
+import { themeNavigation } from '#/theme'
 
 const App = () => {
+  const { styles, theme } = useTheme(getStyles)
+
   return (
     <StoreProvider store={store}>
-      <StatusBar style='dark' />
+      <StatusBar style='auto' />
 
-      <NavigationContainer>
+      <NavigationContainer theme={themeNavigation(theme)}>
         <View style={styles.container}>
           <Navigation />
         </View>
@@ -21,10 +26,11 @@ const App = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = theme => StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: theme.colors.backgroundPrimary
   }
 })
 
