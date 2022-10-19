@@ -23,7 +23,7 @@ const THEME = {
 export const THEME_LIGHT = {
   colors: {
     backgroundPrimary: '#FFFFFF',
-    backgroundSecondary: '#586069',
+    backgroundSecondary: '#4545FF',
 
     primary: '#4A90E2',
     secondary: '#0A9640',

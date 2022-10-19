@@ -1,14 +1,9 @@
-import { useState } from 'react'
-import { Appearance } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import { THEME_DARK, THEME_LIGHT } from '#/theme'
 
 const useTheme = (getStyles) => {
-  const [theme, setTheme] = useState(Appearance.getColorScheme())
-
-  Appearance.addChangeListener(scheme => {
-    setTheme(scheme.colorScheme)
-  })
+  const theme = useSelector(state => state.theme.theme)
 
   const activeTheme = theme === 'dark' ? THEME_DARK : THEME_LIGHT
   const styles = getStyles && typeof getStyles === 'function' ? getStyles(activeTheme) : null
