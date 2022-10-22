@@ -40,7 +40,7 @@ export const THEME_LIGHT = {
 export const THEME_DARK = {
   colors: {
     backgroundPrimary: '#000000',
-    backgroundSecondary: '#FFFFFF',
+    backgroundSecondary: '#4545FF',
 
     primary: '#4A90E2',
     secondary: '#0A9640',

@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native'
 
 import useTheme from 'hooks/useTheme'
+import { hp } from 'utils'
 
 const CardMain = ({ children }) => {
   const { styles } = useTheme(getStyles)
@@ -14,7 +15,9 @@ const CardMain = ({ children }) => {
 
 const getStyles = theme => StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.backgroundSecondary
+    backgroundColor: theme.colors.backgroundSecondary,
+    borderRadius: 10,
+    padding: hp('10%')
   }
 })
 

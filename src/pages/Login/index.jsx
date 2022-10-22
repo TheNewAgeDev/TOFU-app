@@ -1,8 +1,10 @@
 import { View, StyleSheet } from 'react-native'
 
-import useTheme from '#/hooks/useTheme'
+import useTheme from 'hooks/useTheme'
 import { hp } from 'utils'
 
+import Card from 'components/Cards/Main'
+import Unipaz from 'components/Icons/unipaz'
 import Text from 'components/Styled/Text'
 
 const Login = () => {
@@ -10,7 +12,11 @@ const Login = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
+      <Unipaz height='50%' width='50%' />
+
+      <Card>
+        <Text>Login</Text>
+      </Card>
     </View>
   )
 }
