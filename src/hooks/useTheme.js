@@ -4,13 +4,14 @@ import { THEME_DARK, THEME_LIGHT } from '#/theme'
 
 const useTheme = (getStyles) => {
   const theme = useSelector(state => state.theme.theme)
+  const isDark = theme === 'dark'
 
   const activeTheme = theme === 'dark' ? THEME_DARK : THEME_LIGHT
-  const styles = getStyles && typeof getStyles === 'function' ? getStyles(activeTheme) : null
+  const styles = getStyles && typeof getStyles === 'function' ? getStyles(activeTheme, isDark) : null
 
   return {
-    isDark: theme === 'dark',
     theme: activeTheme,
+    isDark,
     styles
   }
 }
