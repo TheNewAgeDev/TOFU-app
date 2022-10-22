@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { View, StyleSheet, Appearance } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -24,9 +25,11 @@ const Routes = () => {
   const { theme, styles } = useTheme(getStyles)
   const dispatch = useDispatch()
 
-  Appearance.addChangeListener(scheme => {
-    dispatch(setTheme(scheme.colorScheme))
-  })
+  useEffect(() => {
+    Appearance.addChangeListener(scheme => {
+      dispatch(setTheme(scheme.colorScheme))
+    })
+  }, [])
 
   return (
     <NavigationContainer theme={themeNavigation(theme)}>
