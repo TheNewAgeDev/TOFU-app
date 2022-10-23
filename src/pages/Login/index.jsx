@@ -3,10 +3,8 @@ import { View, StyleSheet } from 'react-native'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-import Card from 'components/Cards/Main'
 import Unipaz from 'components/Icons/unipaz'
-import Button from 'components/Styled/Button'
-import Text from 'components/Styled/Text'
+import CardForm from 'pages/Login/CardForm'
 
 const Login = () => {
   const { styles } = useTheme(getStyles)
@@ -15,11 +13,7 @@ const Login = () => {
     <View style={styles.container}>
       <Unipaz style={styles.logoStyles} theme={styles.logoTheme} width={wp('40%')} height={hp('30%')} />
 
-      <Card>
-        <Text>Login</Text>
-      </Card>
-
-      <Button>Iniciar Sesión</Button>
+      <CardForm />
     </View>
   )
 }
@@ -32,7 +26,9 @@ const getStyles = (theme, isDark) => StyleSheet.create({
     alignItems: 'center'
   },
   logoTheme: {
-    letter: isDark ? theme.colors.white : theme.colors.black
+    letter: isDark ? theme.colors.white : theme.colors.black,
+    blue: isDark ? '#ffffff' : '#243673',
+    green: isDark ? '#ffffff' : '#129740'
   },
   logoStyles: {
     marginBottom: hp('5%')

@@ -17,7 +17,7 @@ const getStyles = theme => StyleSheet.create({
   container: {
     backgroundColor: theme.colors.backgroundSecondary,
     borderRadius: 10,
-    padding: hp('10%')
+    padding: hp('2%')
   }
 })
 
