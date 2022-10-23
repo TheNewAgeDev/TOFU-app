@@ -7,8 +7,8 @@ import Input from 'components/Styled/Input'
 
 import { hp } from 'utils'
 
-const handleLogin = (navigation) => {
-  navigation.navigate('program')
+const handleProgram = (navigation) => {
+  navigation.navigate('home')
 }
 
 const CardForm = () => {
@@ -17,11 +17,16 @@ const CardForm = () => {
   return (
     <>
       <Card>
-        <Input label='Correo electrónico' icon='user' placeholder='Ingrese el correo' style={styles.input} />
-        <Input label='Contraseña' icon='lock' placeholder='Ingrese la contraseña' secureTextEntry />
+        <Input label='Programa' icon='vcard' placeholder='Elija su programa' style={styles.input} />
       </Card>
 
-      <Button onPress={() => handleLogin(navigation)} iconRight='arrow-right' style={styles.buttonStyles}>Iniciar sesión</Button>
+      <Button
+        onPress={() => handleProgram(navigation)}
+        iconRight='arrow-right'
+        style={styles.buttonStyles}
+      >
+        Continuar
+      </Button>
     </>
   )
 }

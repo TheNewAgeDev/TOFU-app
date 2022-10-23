@@ -11,12 +11,14 @@ import { themeNavigation } from '#/theme'
 
 import Home from 'views/Home'
 import Login from 'views/Login'
+import Program from 'views/Program'
 
 const InitialRoutes = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='login'>
       <Stack.Screen name='home' options={{ title: 'Inicio' }} component={Home} />
       <Stack.Screen name='login' options={{ title: 'Inicia Sesión' }} component={Login} />
+      <Stack.Screen name='program' options={{ title: 'Programa' }} component={Program} />
     </Stack.Navigator>
   )
 }
