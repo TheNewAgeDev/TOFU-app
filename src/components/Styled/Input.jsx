@@ -4,14 +4,25 @@ import { FontAwesome } from '@expo/vector-icons'
 import useTheme from 'hooks/useTheme'
 import { wp, hp, setOpacity } from 'utils'
 
-const StyledInput = ({ icon, placeholder }) => {
+import Text from 'components/Styled/Text'
+
+const StyledInput = ({ label, icon, placeholder, style }) => {
   const { styles } = useTheme(getStyles)
 
+  const ButtonStyles = [
+    styles.container,
+    style
+  ]
+
   return (
-    <View style={styles.container}>
-      {icon && <FontAwesome style={styles.icon} name={icon} size={24} color='black' />}
-      <TextInput style={styles.input} placeholder={placeholder} placeholderTextColor={styles.placeholderTextColor} />
-    </View>
+    <>
+      {label && <Text style={styles.label}>{label}</Text>}
+
+      <View style={ButtonStyles}>
+        {icon && <FontAwesome style={styles.icon} name={icon} size={24} color='black' />}
+        <TextInput style={styles.input} placeholder={placeholder} placeholderTextColor={styles.placeholderTextColor} />
+      </View>
+    </>
   )
 }
 
@@ -24,9 +35,13 @@ const getStyles = (theme, isDark) => {
       alignItems: 'center',
 
       backgroundColor: backgroundPrimary,
-      margin: hp('2%'),
       paddingLeft: wp('3%'),
       borderRadius: 50
+    },
+    label: {
+      color: white,
+      marginBottom: hp('0.8%'),
+      marginLeft: wp('5%')
     },
     icon: {
       marginLeft: wp('2%'),
@@ -36,7 +51,7 @@ const getStyles = (theme, isDark) => {
     input: {
       color: isDark ? white : black,
       width: wp('50%'),
-      height: hp('7%'),
+      height: hp('6%'),
       paddingLeft: 10,
 
       borderBottomRightRadius: 50,

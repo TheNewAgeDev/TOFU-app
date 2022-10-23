@@ -10,8 +10,8 @@ const CardForm = () => {
   return (
     <>
       <Card>
-        <Input icon='user' placeholder='Ingrese el correo' />
-        <Input icon='lock' placeholder='Ingrese la contraseña' />
+        <Input label='Correo electrónico' icon='user' placeholder='Ingrese el correo' style={styles.input} />
+        <Input label='Contraseña' icon='lock' placeholder='Ingrese la contraseña' />
       </Card>
 
       <Button iconRight='arrow-right' style={styles.buttonStyles}>Iniciar sesión</Button>
@@ -22,6 +22,9 @@ const CardForm = () => {
 const styles = StyleSheet.create({
   buttonStyles: {
     marginTop: hp('8%')
+  },
+  input: {
+    marginBottom: hp('2%')
   }
 })
 
