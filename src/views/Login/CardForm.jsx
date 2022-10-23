@@ -11,7 +11,7 @@ const CardForm = () => {
     <>
       <Card>
         <Input label='Correo electrónico' icon='user' placeholder='Ingrese el correo' style={styles.input} />
-        <Input label='Contraseña' icon='lock' placeholder='Ingrese la contraseña' />
+        <Input label='Contraseña' icon='lock' placeholder='Ingrese la contraseña' secureTextEntry />
       </Card>
 
       <Button iconRight='arrow-right' style={styles.buttonStyles}>Iniciar sesión</Button>

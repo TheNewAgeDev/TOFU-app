@@ -11,7 +11,8 @@ module.exports = function (api) {
             '#': './src',
             components: './src/components',
             hooks: './src/hooks',
-            pages: './src/pages',
+            layouts: './src/layouts',
+            views: './src/views',
             features: './src/features',
             utils: './src/utils'
           }

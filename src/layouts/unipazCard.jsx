@@ -4,9 +4,8 @@ import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
 import Unipaz from 'components/Icons/unipaz'
-import CardForm from 'pages/Login/CardForm'
 
-const Login = () => {
+const unipazCard = ({ CardForm }) => {
   const { styles } = useTheme(getStyles)
 
   return (
@@ -35,4 +34,4 @@ const getStyles = (theme, isDark) => StyleSheet.create({
   }
 })
 
-export default Login
+export default unipazCard

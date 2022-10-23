@@ -6,7 +6,7 @@ import { wp, hp, setOpacity } from 'utils'
 
 import Text from 'components/Styled/Text'
 
-const StyledInput = ({ label, icon, placeholder, style }) => {
+const StyledInput = ({ label, icon, placeholder, style, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
 
   const ButtonStyles = [
@@ -20,7 +20,12 @@ const StyledInput = ({ label, icon, placeholder, style }) => {
 
       <View style={ButtonStyles}>
         {icon && <FontAwesome style={styles.icon} name={icon} size={24} color='black' />}
-        <TextInput style={styles.input} placeholder={placeholder} placeholderTextColor={styles.placeholderTextColor} />
+        <TextInput
+          style={styles.input}
+          placeholder={placeholder}
+          placeholderTextColor={styles.placeholderTextColor}
+          {...restOfProps}
+        />
       </View>
     </>
   )

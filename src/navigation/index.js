@@ -9,8 +9,8 @@ import { setTheme } from 'features/themeSlice'
 import { Constants } from 'utils'
 import { themeNavigation } from '#/theme'
 
-import Home from 'pages/Home'
-import Login from 'pages/Login'
+import Home from 'views/Home'
+import Login from 'views/Login'
 
 const InitialRoutes = () => {
   return (
