@@ -25,7 +25,7 @@ export const THEME_LIGHT = {
     backgroundPrimary: '#FFFFFF',
     backgroundSecondary: '#243673',
 
-    primary: '#4A90E2',
+    primary: '#243673',
     secondary: '#0A9640',
     tertiary: '#000000',
     quaternary: '#555555',
@@ -42,7 +42,7 @@ export const THEME_DARK = {
     backgroundPrimary: '#151515',
     backgroundSecondary: '#243673',
 
-    primary: '#4A90E2',
+    primary: '#243673',
     secondary: '#0A9640',
     tertiary: '#FFFFFF',
     quaternary: '#555555',

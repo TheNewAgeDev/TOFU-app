@@ -2,11 +2,16 @@ import { Text, StyleSheet } from 'react-native'
 
 import useTheme from 'hooks/useTheme'
 
-const StyledText = ({ children }) => {
+const StyledText = ({ children, style }) => {
   const { styles } = useTheme(getStyles)
 
+  const textStyles = [
+    styles.container,
+    style
+  ]
+
   return (
-    <Text style={styles.container}>
+    <Text style={textStyles}>
       {children}
     </Text>
   )

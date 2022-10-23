@@ -3,11 +3,11 @@ import { View, StyleSheet } from 'react-native'
 import useTheme from 'hooks/useTheme'
 import { hp } from 'utils'
 
-const CardMain = ({ children }) => {
+const CardMain = ({ children, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} {...restOfProps}>
       {children}
     </View>
   )

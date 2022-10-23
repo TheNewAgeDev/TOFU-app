@@ -31,7 +31,7 @@ const getStyles = (theme, isDark) => StyleSheet.create({
     green: isDark ? '#ffffff' : '#129740'
   },
   logoStyles: {
-    marginBottom: hp('5%')
+    marginBottom: hp('8%')
   }
 })
 
