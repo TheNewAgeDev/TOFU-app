@@ -8,6 +8,16 @@ import { wp, hp, setOpacity } from 'utils'
 
 import Text from 'components/Styled/Text'
 
+const pickerItems = (options) => {
+  return options.map(option =>
+    <Picker.Item
+      key={option.id}
+      label={option.label}
+      value={option.value}
+    />
+  )
+}
+
 const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
   const [selectedLanguage, setSelectedLanguage] = useState('xd')
@@ -16,6 +26,8 @@ const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
     styles.container,
     style
   ]
+
+  const handleChange = (itemValue) => setSelectedLanguage(itemValue)
 
   return (
     <>
@@ -29,10 +41,10 @@ const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
         <Picker
           style={styles.input}
           selectedValue={selectedLanguage}
-          onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
+          onValueChange={handleChange}
           {...restOfProps}
         >
-          {options.map(option => <Picker.Item key={option.id} label={option.label} value={option.value} />)}
+          {pickerItems(options)}
         </Picker>
       </View>
     </>
