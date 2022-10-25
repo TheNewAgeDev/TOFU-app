@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import Card from 'components/Cards/Main'
 import Button from 'components/Styled/Button'
-import Input from 'components/Styled/Input'
+import Picker from 'components/Styled/Picker'
 
 import { hp } from 'utils'
 
@@ -14,10 +14,29 @@ const handleProgram = (navigation) => {
 const CardForm = () => {
   const navigation = useNavigation()
 
+  const OPTIONS = [
+    {
+      id: 1,
+      label: 'Elija su programa',
+      value: 'default'
+    },
+    {
+      id: 2,
+      label: 'Ingenieria Informatica',
+      value: 'inginformatica'
+    }
+  ]
+
   return (
     <>
       <Card>
-        <Input label='Programa' icon='vcard' placeholder='Elija su programa' style={styles.input} />
+        <Picker
+          label='Programa'
+          icon='vcard'
+          placeholder='Elija su programa'
+          style={styles.input}
+          options={OPTIONS}
+        />
       </Card>
 
       <Button
