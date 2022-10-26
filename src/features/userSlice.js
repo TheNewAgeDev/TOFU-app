@@ -5,6 +5,20 @@ const initialState = {
   name: 'Luis Steven',
   lastname: 'Lopez Rueda',
   email: 'orlando.ospino@unipaz.edu.co',
+  programs: [
+    {
+      id: 1,
+      name: 'Ingenieria Informatica'
+    },
+    {
+      id: 2,
+      name: 'Administración de Empresas'
+    },
+    {
+      id: 3,
+      name: 'MVZ'
+    }
+  ],
   rol: 'student'
 }
 
