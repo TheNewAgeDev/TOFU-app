@@ -54,7 +54,9 @@ export const THEME_DARK = {
   ...THEME
 }
 
-export const themeNavigation = theme => {
+export const themeNavigation = (theme, isDark) => {
+  const { white, black } = theme.colors
+
   return {
     ...NavigationTheme,
     dark: false,
@@ -62,9 +64,9 @@ export const themeNavigation = theme => {
       ...NavigationTheme.colors,
       background: theme.colors.backgroundPrimary,
       primary: theme.colors.quaternary,
-      card: theme.colors.white,
+      card: theme.colors.backgroundPrimary,
       text: theme.colors.tertiary,
-      border: theme.colors.white,
+      border: isDark ? black : white,
       notification: theme.colors.error
     }
   }

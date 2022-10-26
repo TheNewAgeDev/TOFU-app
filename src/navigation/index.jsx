@@ -10,7 +10,7 @@ import { themeNavigation } from '#/theme'
 import LoginRoutes from '#/navigation/LoginRoutes'
 
 const Routes = () => {
-  const { theme } = useTheme()
+  const { theme, isDark } = useTheme()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Routes = () => {
   }, [])
 
   return (
-    <NavigationContainer theme={themeNavigation(theme)}>
+    <NavigationContainer theme={themeNavigation(theme, isDark)}>
       <LoginRoutes />
     </NavigationContainer>
   )

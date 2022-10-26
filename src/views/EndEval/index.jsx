@@ -5,7 +5,7 @@ import Text from 'components/Styled/Text'
 const Home = () => {
   return (
     <View>
-      <Text>Home</Text>
+      <Text>Finalizar</Text>
     </View>
   )
 }
