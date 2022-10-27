@@ -25,7 +25,7 @@ export const THEME_LIGHT = {
     backgroundPrimary: '#FFFFFF',
     backgroundSecondary: '#243673',
 
-    primary: '#243673',
+    primary: '#1237BB',
     secondary: '#0A9640',
     tertiary: '#000000',
     quaternary: '#555555',
@@ -42,7 +42,7 @@ export const THEME_DARK = {
     backgroundPrimary: '#151515',
     backgroundSecondary: '#243673',
 
-    primary: '#243673',
+    primary: '#1237BB',
     secondary: '#0A9640',
     tertiary: '#FFFFFF',
     quaternary: '#555555',
@@ -63,9 +63,9 @@ export const themeNavigation = (theme, isDark) => {
     colors: {
       ...NavigationTheme.colors,
       background: theme.colors.backgroundPrimary,
-      primary: theme.colors.quaternary,
+      primary: white,
       card: theme.colors.backgroundPrimary,
-      text: theme.colors.tertiary,
+      text: white,
       border: isDark ? black : white,
       notification: theme.colors.error
     }
