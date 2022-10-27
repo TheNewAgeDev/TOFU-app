@@ -1,33 +1,80 @@
-import { View, StyleSheet } from 'react-native'
+import { useState } from 'react'
+import { View, StyleSheet, Pressable, Modal } from 'react-native'
+import { FontAwesome } from '@expo/vector-icons'
 
 import StyledText from 'components/Styled/Text'
+import Unipaz from 'components/Icons/unipazLogo'
 
+import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const HeaderTitle = ({ children, style }) => {
+const HeaderTitle = ({ style }) => {
+  const { styles } = useTheme(headerStyles)
+  const [modalVisible, setModalConfig] = useState(false)
+
   const containerStyles = [
-    headerStyles.container,
+    styles.container,
     style
   ]
 
+  const USER = 'usuario'
+
   return (
     <View style={containerStyles}>
-      <StyledText style={headerStyles.styleText}>{children}</StyledText>
+      <Modal
+        animationType='slide'
+        transparent
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalConfig(!modalVisible)
+        }}
+      >
+        <View>
+          <View>
+            <StyledText>Hello World!</StyledText>
+            <Pressable
+              onPress={() => setModalConfig(!modalVisible)}
+            >
+              <StyledText>Hide Modal</StyledText>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+      <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
+      <StyledText style={styles.styleText}>Bienvenido, {USER}</StyledText>
+      <Pressable onPress={() => setModalConfig(!modalVisible)}>
+        <FontAwesome style={styles.icon} name='navicon' size={24} color='black' />
+      </Pressable>
     </View>
   )
 }
 
-const headerStyles = StyleSheet.create({
-  container: {
-    width: wp('65%'),
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+const headerStyles = (theme, isDark) => {
+  const { white, black } = theme.colors
+
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingRight: wp('3.5%'),
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    },
+    logoTheme: {
+      letter: isDark ? white : black,
+      blue: isDark ? '#ffffff' : '#243673',
+      green: isDark ? '#ffffff' : '#129740'
+    },
+    icon: {
+      color: isDark ? white : black
+    }
+  })
+}
 
 export const screenOptions = theme => ({
   headerTitle: (props) => <HeaderTitle {...props} />,
-  headerShadowVisible: false
+  headerShadowVisible: true
 })
 
 export const screenOptionsTab = theme => ({

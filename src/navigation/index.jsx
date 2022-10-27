@@ -14,9 +14,13 @@ const Routes = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    Appearance.addChangeListener(scheme => {
+    const suscribeAppearance = Appearance.addChangeListener(scheme => {
       dispatch(setTheme(scheme.colorScheme))
     })
+
+    return () => {
+      suscribeAppearance.remove()
+    }
   }, [])
 
   return (
