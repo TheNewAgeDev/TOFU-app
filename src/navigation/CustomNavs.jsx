@@ -1,16 +1,17 @@
-import { useState } from 'react'
-import { View, StyleSheet, Pressable, Modal } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { EvilIcons } from '@expo/vector-icons'
 
 import StyledText from 'components/Styled/Text'
+import Settings from 'components/Cards/Settings'
 import Unipaz from 'components/Icons/unipazLogo'
 
 import useTheme from 'hooks/useTheme'
+import useModal from 'hooks/useModal'
 import { wp, hp } from 'utils'
 
 const HeaderTitle = ({ style }) => {
   const { styles } = useTheme(headerStyles)
-  const [modalVisible, setModalConfig] = useState(false)
+  const { Modal, setVisibleModal } = useModal(Settings)
 
   const containerStyles = [
     styles.container,
@@ -21,31 +22,13 @@ const HeaderTitle = ({ style }) => {
 
   return (
     <View style={containerStyles}>
-      <Modal
-        animationType='slide'
-        transparent
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalConfig(!modalVisible)
-        }}
-      >
-        <View>
-          <View>
-            <StyledText>Hello World!</StyledText>
-            <Pressable
-              onPress={() => setModalConfig(!modalVisible)}
-            >
-              <StyledText>Hide Modal</StyledText>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+      <Modal />
 
       <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
       <StyledText style={styles.styleText}>Bienvenido, {USER}</StyledText>
-      <Pressable onPress={() => setModalConfig(!modalVisible)}>
-        <FontAwesome style={styles.icon} name='navicon' size={24} color='black' />
-      </Pressable>
+      <TouchableOpacity onPress={setVisibleModal}>
+        <EvilIcons style={styles.icon} name='navicon' size={40} color='black' />
+      </TouchableOpacity>
     </View>
   )
 }
@@ -56,7 +39,7 @@ const headerStyles = (theme, isDark) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      paddingRight: wp('3.5%'),
+      paddingRight: wp('2%'),
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center'

@@ -55,19 +55,19 @@ export const THEME_DARK = {
 }
 
 export const themeNavigation = theme => {
-  const { black } = theme.colors
+  const { white, black, backgroundPrimary, error } = theme.colors
 
   return {
     ...NavigationTheme,
     dark: false,
     colors: {
       ...NavigationTheme.colors,
-      background: theme.colors.backgroundPrimary,
-      primary: theme.colors.white,
-      card: theme.colors.backgroundPrimary,
-      text: theme.colors.white,
+      background: backgroundPrimary,
+      primary: white,
+      card: backgroundPrimary,
+      text: white,
       border: black,
-      notification: theme.colors.error
+      notification: error
     }
   }
 }
