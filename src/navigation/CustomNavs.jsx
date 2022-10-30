@@ -11,7 +11,7 @@ import { wp, hp } from 'utils'
 
 const HeaderTitle = ({ style }) => {
   const { styles } = useTheme(headerStyles)
-  const { Modal, setVisibleModal } = useModal(Settings)
+  const { Modal, toggleModal } = useModal(Settings)
 
   const containerStyles = [
     styles.container,
@@ -26,7 +26,7 @@ const HeaderTitle = ({ style }) => {
 
       <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
       <StyledText style={styles.styleText}>Bienvenido, {USER}</StyledText>
-      <TouchableOpacity onPress={setVisibleModal}>
+      <TouchableOpacity onPress={toggleModal}>
         <EvilIcons style={styles.icon} name='navicon' size={40} color='black' />
       </TouchableOpacity>
     </View>

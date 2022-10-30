@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 
 import useTheme from 'hooks/useTheme'
-import { setTheme } from 'features/themeSlice'
+import { setTheme } from 'features/settingSlice'
 import { themeNavigation } from '#/theme'
 
 import LoginRoutes from '#/navigation/LoginRoutes'

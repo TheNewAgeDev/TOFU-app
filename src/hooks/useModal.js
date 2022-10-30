@@ -1,19 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { toggleConfig } from 'features/settingSlice'
 
 const useModal = (ModalComponent) => {
-  const [modalVisible, setModalConfig] = useState(false)
+  const dispatch = useDispatch()
+  const configModal = useSelector(state => state.setting.configModal)
+  const [modalVisible, setModalConfig] = useState(configModal)
 
-  const setVisibleModal = () => setModalConfig(!modalVisible)
+  useEffect(() => {
+    setModalConfig(configModal)
+  }, [configModal])
+
+  const toggleModal = () => {
+    dispatch(toggleConfig())
+    setModalConfig(configModal)
+  }
 
   const Modal = () => {
     return (
-      <ModalComponent modalVisible={modalVisible} />
+      <ModalComponent modalVisible={modalVisible} toggleModal={toggleModal} />
     )
   }
 
   return {
     Modal,
-    setVisibleModal
+    toggleModal
   }
 }
 

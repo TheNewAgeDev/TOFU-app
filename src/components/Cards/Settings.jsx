@@ -1,4 +1,5 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { Entypo, AntDesign, Ionicons } from '@expo/vector-icons'
 
 import StyledText from 'components/Styled/Text'
@@ -6,7 +7,7 @@ import StyledText from 'components/Styled/Text'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const ButtonLink = ({ icon, typeIcon, children }) => {
+const ButtonLink = ({ icon, typeIcon, children, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
 
   const SIZE = 20
@@ -22,24 +23,30 @@ const ButtonLink = ({ icon, typeIcon, children }) => {
   }
 
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} {...restOfProps}>
       {icon && <Icon />}
       <StyledText style={styles.text}>{children}</StyledText>
     </TouchableOpacity>
   )
 }
 
-const SettingsComponent = ({ modalVisible }) => {
+const SettingsComponent = ({ modalVisible, toggleModal }) => {
   const { styles } = useTheme(getStyles)
+  const navigation = useNavigation()
 
   if (!modalVisible) return null
+
+  const handleSesion = () => {
+    navigation.navigate('login')
+    toggleModal()
+  }
 
   return (
     <View style={styles.containerModal}>
       <ButtonLink typeIcon='entypo' icon='help-with-circle'>Ayuda</ButtonLink>
       <ButtonLink typeIcon='ant-design' icon='infocirlce'>Acerca de</ButtonLink>
       <ButtonLink typeIcon='ionicons' icon='md-moon'>Modo Oscuro</ButtonLink>
-      <ButtonLink typeIcon='entypo' icon='log-out'>Cerrar Sesión</ButtonLink>
+      <ButtonLink typeIcon='entypo' icon='log-out' onPress={handleSesion}>Cerrar Sesión</ButtonLink>
     </View>
   )
 }
@@ -56,7 +63,7 @@ const getStyles = (theme, isDark) => {
       borderWidth: 0.5,
       borderColor: isDark ? white : black,
       borderRadius: 5,
-      width: wp('50%')
+      width: wp('45%')
     },
     icon: {
       color: isDark ? white : black
@@ -66,7 +73,7 @@ const getStyles = (theme, isDark) => {
       alignItems: 'center',
       marginVertical: wp('1%'),
       height: hp('4%'),
-      paddingLeft: hp('1.2%')
+      paddingLeft: hp('2%')
     },
     text: {
       marginLeft: wp('1.5%')

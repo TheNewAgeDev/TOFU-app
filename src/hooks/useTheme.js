@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { THEME_DARK, THEME_LIGHT } from '#/theme'
 
 const useTheme = (getStyles) => {
-  const theme = useSelector(state => state.theme.theme)
+  const theme = useSelector(state => state.setting.theme)
   const isDark = theme === 'dark'
 
   const activeTheme = theme === 'dark' ? THEME_DARK : THEME_LIGHT
