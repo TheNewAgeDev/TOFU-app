@@ -25,7 +25,11 @@ const HeaderTitle = ({ style }) => {
       <Modal />
 
       <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
-      <StyledText style={styles.styleText}>Bienvenido, {name}</StyledText>
+      <View style={styles.contentName}>
+        <StyledText style={styles.styleText}>Bienvenido, </StyledText>
+        <StyledText style={styles.name}>{name}</StyledText>
+      </View>
+
       <TouchableOpacity onPress={toggleModal}>
         <EvilIcons style={styles.icon} name='navicon' size={40} color='black' />
       </TouchableOpacity>
@@ -51,6 +55,12 @@ const headerStyles = (theme, isDark) => {
     },
     icon: {
       color: isDark ? white : black
+    },
+    contentName: {
+      flexDirection: 'row'
+    },
+    name: {
+      color: theme.colors.primary
     }
   })
 }

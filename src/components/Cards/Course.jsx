@@ -5,11 +5,11 @@ import { wp, hp } from 'utils'
 
 import StyledText from 'components/Styled/Text'
 
-const Course = ({ course }) => {
+const Course = ({ course, style }) => {
   const { styles } = useTheme(getStyles)
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={[styles.container, style]}>
       <Image resizeMode='cover' source={{ uri: course.image }} style={styles.image} />
       <StyledText style={styles.title}>{course.name}</StyledText>
     </TouchableOpacity>

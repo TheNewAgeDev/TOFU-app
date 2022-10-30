@@ -1,12 +1,23 @@
-import { View } from 'react-native'
+import { FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
 
-import Text from 'components/Styled/Text'
+import useTheme from 'hooks/useTheme'
+
+import Course from 'components/Cards/Course'
+import { getStyles } from 'views/StartEval'
 
 const Home = () => {
+  const { styles } = useTheme(getStyles)
+  const courses = useSelector(state => state.user.courses.filter(course => course.state === 'end'))
+
   return (
-    <View>
-      <Text>Finalizar</Text>
-    </View>
+    <FlatList
+      style={styles.container}
+      data={courses}
+      columnWrapperStyle={{ justifyContent: 'space-between' }}
+      renderItem={({ item }) => <Course style={styles.course} course={item} />}
+      numColumns={2}
+    />
   )
 }
 
