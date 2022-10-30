@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 
 import Card from 'components/Cards/Main'
@@ -13,19 +14,15 @@ const handleProgram = (navigation) => {
 
 const CardForm = () => {
   const navigation = useNavigation()
+  const programs = useSelector(state => state.user.programs.map(item => {
+    return { id: item.id, label: item.name, value: item.slug }
+  }))
 
-  const OPTIONS = [
-    {
-      id: 1,
-      label: 'Elija su programa',
-      value: 'default'
-    },
-    {
-      id: 2,
-      label: 'Ingenieria Informatica',
-      value: 'inginformatica'
-    }
-  ]
+  const DEFAULT = {
+    id: 1,
+    label: 'Elija su programa',
+    value: 'default'
+  }
 
   return (
     <>
@@ -35,7 +32,10 @@ const CardForm = () => {
           icon='vcard'
           placeholder='Elija su programa'
           style={styles.input}
-          options={OPTIONS}
+          options={[
+            DEFAULT,
+            ...programs
+          ]}
         />
       </Card>
 

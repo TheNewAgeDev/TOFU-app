@@ -2,21 +2,89 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   id: '1509234566',
-  name: 'Luis Steven',
+  name: 'Luis',
   lastname: 'Lopez Rueda',
   email: 'orlando.ospino@unipaz.edu.co',
   programs: [
     {
-      id: 1,
-      name: 'Ingenieria Informatica'
-    },
-    {
       id: 2,
-      name: 'Administración de Empresas'
+      name: 'Ingenieria Informatica',
+      slug: 'info'
     },
     {
       id: 3,
-      name: 'MVZ'
+      name: 'Administración de Empresas',
+      slug: 'adm'
+    },
+    {
+      id: 4,
+      name: 'MVZ',
+      slug: 'mvz'
+    }
+  ],
+  courses: [
+    {
+      id: 1,
+      name: 'Mátematicas IV',
+      image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 2,
+      name: 'Base de Datos',
+      image: 'https://placehold.jp/0a72b2/ffffff/150x150.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 3,
+      name: 'Fisica II',
+      image: 'https://placehold.jp/2a2c2d/ffffff/200x800.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 4,
+      name: 'Mátematicas IV',
+      image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 5,
+      name: 'Base de Datos',
+      image: 'https://placehold.jp/0a72b2/ffffff/150x150.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 6,
+      name: 'Fisica II',
+      image: 'https://placehold.jp/2a2c2d/ffffff/200x800.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 7,
+      name: 'Mátematicas IV',
+      image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 8,
+      name: 'Base de Datos',
+      image: 'https://placehold.jp/0a72b2/ffffff/150x150.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
+    },
+    {
+      id: 9,
+      name: 'Fisica II',
+      image: 'https://placehold.jp/2a2c2d/ffffff/200x800.png',
+      teacher: 'Cipriano López Vides',
+      program: 'info'
     }
   ],
   rol: 'student'

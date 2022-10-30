@@ -1,4 +1,5 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { useSelector } from 'react-redux'
 import { EvilIcons } from '@expo/vector-icons'
 
 import StyledText from 'components/Styled/Text'
@@ -11,6 +12,7 @@ import { wp, hp } from 'utils'
 
 const HeaderTitle = ({ style }) => {
   const { styles } = useTheme(headerStyles)
+  const name = useSelector(state => state.user.name)
   const { Modal, toggleModal } = useModal(Settings)
 
   const containerStyles = [
@@ -18,14 +20,12 @@ const HeaderTitle = ({ style }) => {
     style
   ]
 
-  const USER = 'usuario'
-
   return (
     <View style={containerStyles}>
       <Modal />
 
       <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
-      <StyledText style={styles.styleText}>Bienvenido, {USER}</StyledText>
+      <StyledText style={styles.styleText}>Bienvenido, {name}</StyledText>
       <TouchableOpacity onPress={toggleModal}>
         <EvilIcons style={styles.icon} name='navicon' size={40} color='black' />
       </TouchableOpacity>
