@@ -13,8 +13,9 @@ export const settingSlice = createSlice({
     setTheme: (state, action) => {
       state.theme = action.payload
     },
-    toggleConfig: (state) => {
-      state.configModal = !state.configModal
+    toggleConfig: (state, action) => {
+      const { disabled } = action.payload
+      state.configModal = disabled ? false : !state.configModal
     }
   }
 })

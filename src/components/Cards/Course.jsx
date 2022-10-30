@@ -1,15 +1,21 @@
 import { TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 import useTheme from 'hooks/useTheme'
+import useModal from 'hooks/useModal'
 import { wp, hp } from 'utils'
 
 import StyledText from 'components/Styled/Text'
 
 const Course = ({ course, style }) => {
   const { styles } = useTheme(getStyles)
+  const { toggleModal } = useModal()
+
+  const handlePress = () => {
+    toggleModal(true)
+  }
 
   return (
-    <TouchableOpacity style={[styles.container, style]}>
+    <TouchableOpacity onPress={handlePress} style={[styles.container, style]}>
       <Image resizeMode='cover' source={{ uri: course.image }} style={styles.image} />
       <StyledText style={styles.title}>{course.name}</StyledText>
     </TouchableOpacity>
@@ -26,7 +32,8 @@ const getStyles = (theme, isDark) => {
       borderWidth: 0.8,
       borderRadius: wp('5%'),
       width: wp('40%'),
-      height: hp('20%')
+      height: hp('20%'),
+      zIndex: -2
     },
     image: {
       width: wp('39.7%'),

@@ -9,7 +9,7 @@ import Picker from 'components/Styled/Picker'
 import { hp } from 'utils'
 
 const handleProgram = (navigation) => {
-  navigation.navigate('home')
+  navigation.navigate('user')
 }
 
 const CardForm = () => {

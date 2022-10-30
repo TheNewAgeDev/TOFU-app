@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { toggleConfig } from 'features/settingSlice'
 
-const useModal = (ModalComponent) => {
+import Settings from 'components/Cards/Settings'
+
+const useModal = () => {
   const dispatch = useDispatch()
   const configModal = useSelector(state => state.setting.configModal)
   const [modalVisible, setModalConfig] = useState(configModal)
@@ -12,14 +14,14 @@ const useModal = (ModalComponent) => {
     setModalConfig(configModal)
   }, [configModal])
 
-  const toggleModal = () => {
-    dispatch(toggleConfig())
+  const toggleModal = (disabled = false) => {
+    dispatch(toggleConfig({ disabled }))
     setModalConfig(configModal)
   }
 
   const Modal = () => {
     return (
-      <ModalComponent modalVisible={modalVisible} toggleModal={toggleModal} />
+      <Settings modalVisible={modalVisible} toggleModal={toggleModal} />
     )
   }
 

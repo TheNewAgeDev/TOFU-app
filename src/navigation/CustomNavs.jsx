@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import { EvilIcons } from '@expo/vector-icons'
 
 import StyledText from 'components/Styled/Text'
-import Settings from 'components/Cards/Settings'
 import Unipaz from 'components/Icons/unipazLogo'
 
 import useTheme from 'hooks/useTheme'
@@ -13,7 +12,7 @@ import { wp, hp } from 'utils'
 const HeaderTitle = ({ style }) => {
   const { styles } = useTheme(headerStyles)
   const name = useSelector(state => state.user.name)
-  const { Modal, toggleModal } = useModal(Settings)
+  const { Modal, toggleModal } = useModal()
 
   const containerStyles = [
     styles.container,
@@ -22,7 +21,6 @@ const HeaderTitle = ({ style }) => {
 
   return (
     <View style={containerStyles}>
-      <Modal />
 
       <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
       <View style={styles.contentName}>
@@ -30,9 +28,11 @@ const HeaderTitle = ({ style }) => {
         <StyledText style={styles.name}>{name}</StyledText>
       </View>
 
-      <TouchableOpacity onPress={toggleModal}>
+      <TouchableOpacity onPress={() => { toggleModal() }}>
         <EvilIcons style={styles.icon} name='navicon' size={40} color='black' />
       </TouchableOpacity>
+
+      <Modal />
     </View>
   )
 }
@@ -43,7 +43,7 @@ const headerStyles = (theme, isDark) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      paddingRight: wp('2%'),
+      paddingRight: wp('6%'),
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center'
@@ -67,11 +67,12 @@ const headerStyles = (theme, isDark) => {
 
 export const screenOptions = theme => ({
   headerTitle: (props) => <HeaderTitle {...props} />,
-  headerShadowVisible: true
+  headerShadowVisible: true,
+  headerBackVisible: false
 })
 
 export const screenOptionsTab = theme => ({
-  headerTitle: (props) => <HeaderTitle {...props} style={{ width: wp('95%') }} />,
+  headerTitle: (props) => <HeaderTitle {...props} />,
   tabBarShowLabel: true, // Ocultar Labels xD
   tabBarHideOnKeyboard: true,
   tabBarItemStyle: {

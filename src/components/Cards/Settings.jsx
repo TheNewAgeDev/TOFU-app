@@ -38,7 +38,7 @@ const SettingsComponent = ({ modalVisible, toggleModal }) => {
 
   const handleSesion = () => {
     navigation.navigate('login')
-    toggleModal()
+    toggleModal(true)
   }
 
   return (
