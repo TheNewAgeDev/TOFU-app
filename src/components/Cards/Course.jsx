@@ -1,4 +1,5 @@
 import { TouchableOpacity, StyleSheet, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import useTheme from 'hooks/useTheme'
 import useModal from 'hooks/useModal'
@@ -9,9 +10,13 @@ import StyledText from 'components/Styled/Text'
 const Course = ({ course, style }) => {
   const { styles } = useTheme(getStyles)
   const { toggleModal } = useModal()
+  const navigation = useNavigation()
 
   const handlePress = () => {
     toggleModal(true)
+    navigation.navigate('survey', {
+      course
+    })
   }
 
   return (
@@ -29,11 +34,11 @@ const getStyles = (theme, isDark) => {
     container: {
       backgroundColor: isDark ? black : white,
       borderColor: isDark ? white : black,
-      borderWidth: 0.8,
+      borderWidth: 0.4,
       borderRadius: wp('5%'),
       width: wp('40%'),
       height: hp('20%'),
-      zIndex: -2
+      elevation: 2
     },
     image: {
       width: wp('39.7%'),

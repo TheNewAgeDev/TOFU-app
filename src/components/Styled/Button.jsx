@@ -30,7 +30,8 @@ const getStyles = theme => StyleSheet.create({
     paddingVertical: hp('1.5%'),
     paddingHorizontal: wp('6%'),
     borderRadius: 50,
-    backgroundColor: theme.colors.secondary
+    backgroundColor: theme.colors.secondary,
+    elevation: 4
   },
   iconLeft: {
     color: theme.colors.white,

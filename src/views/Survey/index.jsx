@@ -1,13 +1,20 @@
 import { View } from 'react-native'
 
+import useModal from 'hooks/useModal'
+
 import StyledText from 'components/Styled/Text'
 
-const Program = () => {
+const Survey = ({ route }) => {
+  const { course } = route.params
+  const { Modal } = useModal()
+
   return (
     <View>
-      <StyledText>Encuesta</StyledText>
+      <Modal />
+
+      <StyledText>{course.name}</StyledText>
     </View>
   )
 }
 
-export default Program
+export default Survey

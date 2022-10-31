@@ -12,7 +12,7 @@ import { wp, hp } from 'utils'
 const HeaderTitle = ({ style }) => {
   const { styles } = useTheme(headerStyles)
   const name = useSelector(state => state.user.name)
-  const { Modal, toggleModal } = useModal()
+  const { toggleModal } = useModal()
 
   const containerStyles = [
     styles.container,
@@ -31,8 +31,6 @@ const HeaderTitle = ({ style }) => {
       <TouchableOpacity onPress={() => { toggleModal() }}>
         <EvilIcons style={styles.icon} name='navicon' size={40} color='black' />
       </TouchableOpacity>
-
-      <Modal />
     </View>
   )
 }
@@ -76,19 +74,22 @@ export const screenOptionsTab = theme => ({
   tabBarShowLabel: true, // Ocultar Labels xD
   tabBarHideOnKeyboard: true,
   tabBarItemStyle: {
-    borderRadius: wp('100%'),
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: wp('5%'),
+    height: hp('5%'),
+    margin: 0,
+    padding: 0,
+    paddingBottom: hp('0.3%'),
     marginBottom: hp('1%')
   },
   tabBarActiveBackgroundColor: theme.colors.primary,
   tabBarStyle: {
     backgroundColor: theme.colors.backgroundSecondary,
-    padding: wp('3%'),
-    paddingHorizontal: wp('5%'),
+    padding: hp('1%'),
+    paddingHorizontal: wp('3%'),
     height: hp('7%'),
     borderTopLeftRadius: hp('2%'),
-    borderTopRightRadius: hp('2%')
+    borderTopRightRadius: hp('2%'),
+    elevation: 2
   },
   tabBarLabelPosition: 'beside-icon',
   tabBarLabelStyle: {

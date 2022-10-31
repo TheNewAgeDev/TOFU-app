@@ -46,6 +46,7 @@ const SettingsComponent = ({ modalVisible, toggleModal }) => {
       <ButtonLink typeIcon='entypo' icon='help-with-circle'>Ayuda</ButtonLink>
       <ButtonLink typeIcon='ant-design' icon='infocirlce'>Acerca de</ButtonLink>
       <ButtonLink typeIcon='ionicons' icon='md-moon'>Modo Oscuro</ButtonLink>
+      <ButtonLink typeIcon='ant-design' icon='retweet'>Cambiar Programa</ButtonLink>
       <ButtonLink typeIcon='entypo' icon='log-out' onPress={handleSesion}>Cerrar Sesión</ButtonLink>
     </View>
   )
@@ -57,13 +58,16 @@ const getStyles = (theme, isDark) => {
   return StyleSheet.create({
     containerModal: {
       position: 'absolute',
-      top: hp('7%'),
-      right: 0,
+      top: hp('0%'),
+      right: wp('0%'),
       backgroundColor: theme.colors.backgroundPrimary,
-      borderWidth: 0.5,
+      borderWidth: 0.0,
       borderColor: isDark ? white : black,
-      borderRadius: 5,
-      width: wp('45%')
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5,
+      width: wp('45%'),
+      zIndex: 99,
+      elevation: 5
     },
     icon: {
       color: isDark ? white : black
