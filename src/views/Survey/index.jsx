@@ -1,19 +1,19 @@
-import { View } from 'react-native'
-
 import useModal from 'hooks/useModal'
 
-import StyledText from 'components/Styled/Text'
+import QuestionCard from 'layouts/question'
+
+const COUNT = 1
 
 const Survey = ({ route }) => {
   const { course } = route.params
   const { Modal } = useModal()
 
   return (
-    <View>
+    <>
       <Modal />
 
-      <StyledText>{course.name}</StyledText>
-    </View>
+      <QuestionCard num={COUNT} course={course} />
+    </>
   )
 }
 

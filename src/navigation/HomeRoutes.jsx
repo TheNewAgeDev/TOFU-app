@@ -15,8 +15,8 @@ const UserRoutes = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptions(theme)} initialRouteName='home'>
-      <Stack.Screen name='home' options={{ title: 'Inicio' }} component={HomeRoutes} />
-      <Stack.Screen name='survey' options={{ title: 'Encuesta' }} component={Survey} />
+      <Stack.Screen name='home' options={{ title: 'Evaluación Docente' }} component={HomeRoutes} />
+      <Stack.Screen name='survey' options={{ title: 'Evaluación Docente' }} component={Survey} />
     </Stack.Navigator>
   )
 }
@@ -26,9 +26,30 @@ const HomeRoutes = () => {
 
   return (
     <Tab.Navigator screenOptions={{ ...screenOptionsTab(theme), headerShown: false }} initialRouteName='start'>
-      <Tab.Screen name='start' options={{ title: 'Empezar', tabBarBadge: 3 }} component={StartEval} />
-      <Tab.Screen name='continue' options={{ title: 'Continuar' }} component={ContinueEval} />
-      <Tab.Screen name='ends' options={{ title: 'Finalizados' }} component={EndEval} />
+      <Tab.Screen
+        name='start'
+        options={{
+          title: 'Empezar | Evaluación Docente',
+          tabBarLabel: 'Empezar'
+        }}
+        component={StartEval}
+      />
+      <Tab.Screen
+        name='continue'
+        options={{
+          title: 'Continuar | Evaluación Docente',
+          tabBarLabel: 'Continuar'
+        }}
+        component={ContinueEval}
+      />
+      <Tab.Screen
+        name='ends'
+        options={{
+          title: 'Finalizados | Evaluación Docente',
+          tabBarLabel: 'Finalizados'
+        }}
+        component={EndEval}
+      />
     </Tab.Navigator>
   )
 }

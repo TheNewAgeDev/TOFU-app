@@ -13,9 +13,9 @@ const InitialRoutes = () => {
 
   return (
     <Stack.Navigator screenOptions={{ ...screenOptions(theme), headerShown: false }} initialRouteName='login'>
-      <Stack.Screen name='user' options={{ title: 'Inicio' }} component={UserRoutes} />
-      <Stack.Screen name='login' options={{ title: 'Inicia Sesión' }} component={Login} />
-      <Stack.Screen name='program' options={{ title: 'Programa' }} component={Program} />
+      <Stack.Screen name='user' options={{ title: 'Evaluación Docente' }} component={UserRoutes} />
+      <Stack.Screen name='login' options={{ title: 'Inicia Sesión | Evaluación Docente' }} component={Login} />
+      <Stack.Screen name='program' options={{ title: 'Seleccionar Programa | Evaluación Docente' }} component={Program} />
     </Stack.Navigator>
   )
 }

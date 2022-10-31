@@ -25,7 +25,7 @@ const initialState = {
   courses: [
     {
       id: 1,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -33,7 +33,7 @@ const initialState = {
     },
     {
       id: 11,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -41,7 +41,7 @@ const initialState = {
     },
     {
       id: 12,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -49,7 +49,7 @@ const initialState = {
     },
     {
       id: 13,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -57,7 +57,7 @@ const initialState = {
     },
     {
       id: 14,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -65,7 +65,7 @@ const initialState = {
     },
     {
       id: 15,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -89,7 +89,7 @@ const initialState = {
     },
     {
       id: 4,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',
@@ -113,7 +113,7 @@ const initialState = {
     },
     {
       id: 7,
-      name: 'Mátematicas IV',
+      name: 'Matemáticas IV',
       image: 'https://placehold.jp/3e3e41/ffffff/150x150.png',
       teacher: 'Cipriano López Vides',
       program: 'info',

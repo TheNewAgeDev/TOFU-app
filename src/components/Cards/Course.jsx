@@ -33,15 +33,13 @@ const getStyles = (theme, isDark) => {
   return StyleSheet.create({
     container: {
       backgroundColor: isDark ? black : white,
-      borderColor: isDark ? white : black,
-      borderWidth: 0.4,
       borderRadius: wp('5%'),
       width: wp('40%'),
       height: hp('20%'),
       elevation: 2
     },
     image: {
-      width: wp('39.7%'),
+      width: wp('40%'),
       borderTopLeftRadius: wp('5%'),
       borderTopRightRadius: wp('5%'),
       height: hp('15%')

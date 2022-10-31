@@ -9,23 +9,32 @@ import useTheme from 'hooks/useTheme'
 import useModal from 'hooks/useModal'
 import { wp, hp } from 'utils'
 
-const HeaderTitle = ({ style }) => {
+const DEFAULT_TITLE = 'Evaluación Docente'
+
+const HeaderTitle = ({ children }) => {
   const { styles } = useTheme(headerStyles)
   const name = useSelector(state => state.user.name)
   const { toggleModal } = useModal()
 
-  const containerStyles = [
-    styles.container,
-    style
-  ]
+  const isCustomTitle = !children.endsWith(DEFAULT_TITLE)
 
   return (
-    <View style={containerStyles}>
+    <View style={styles.container}>
+      <Unipaz theme={styles.logoTheme} width={wp('10%')} height={hp('8%')} />
 
-      <Unipaz theme={styles.logoTheme} width={wp('8%')} height={hp('8%')} />
       <View style={styles.contentName}>
-        <StyledText style={styles.styleText}>Bienvenido, </StyledText>
-        <StyledText style={styles.name}>{name}</StyledText>
+        {
+          isCustomTitle
+            ? (
+              <StyledText style={styles.styleText}>{children}</StyledText>
+              )
+            : (
+              <>
+                <StyledText style={styles.styleText}>Bienvenido, </StyledText>
+                <StyledText style={styles.name}>{name}</StyledText>
+              </>
+              )
+        }
       </View>
 
       <TouchableOpacity onPress={() => { toggleModal() }}>
@@ -58,7 +67,11 @@ const headerStyles = (theme, isDark) => {
       flexDirection: 'row'
     },
     name: {
-      color: theme.colors.primary
+      color: theme.colors.primary,
+      fontSize: hp('2.2%')
+    },
+    styleText: {
+      fontSize: hp('2.2%')
     }
   })
 }
