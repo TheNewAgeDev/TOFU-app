@@ -1,35 +1,57 @@
 import { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 
 import useTheme from 'hooks/useTheme'
+import { nextCount, prevCount } from 'features/surveySlice'
 import { wp, hp } from 'utils'
 
 import Card from 'components/Cards/Secondary'
 import StyledText from 'components/Styled/Text'
-
 import Button from 'components/Styled/Button'
 
-const QuestionCard = ({ num, course }) => {
+const QuestionCard = ({ num, course, question }) => {
   const navigation = useNavigation()
   const { styles } = useTheme(getStyles)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     navigation.setOptions({ title: course.name })
   }, [])
+
+  const handlePrev = () => {
+    dispatch(prevCount())
+  }
+
+  const handleNext = () => {
+    dispatch(nextCount())
+  }
 
   return (
     <View>
       <StyledText style={styles.teacherName}>{course.teacher}</StyledText>
 
       <Card style={styles.content}>
-        <StyledText>Prueba</StyledText>
+        <StyledText>{question.description}</StyledText>
       </Card>
 
       <View style={styles.menu}>
-        <Button iconLeft='arrow-left' style={styles.buttonBefore}>Anterior</Button>
+        <Button
+          onPress={handlePrev}
+          disabled={num === 1}
+          iconLeft='arrow-left'
+          style={styles.buttonBefore}
+        >
+          Anterior
+        </Button>
         <StyledText style={styles.counter}>{num}/26</StyledText>
-        <Button iconRight='arrow-right'>Siguiente</Button>
+        <Button
+          onPress={handleNext}
+          iconRight='arrow-right'
+        >
+          Siguiente
+        </Button>
       </View>
       <StyledText style={styles.progress}>PROGRESO GUARDADO</StyledText>
     </View>
@@ -46,6 +68,7 @@ const getStyles = theme => StyleSheet.create({
   },
   content: {
     marginVertical: hp('1.5%'),
+    height: hp('74%'),
     marginHorizontal: wp('5%')
   },
   menu: {
