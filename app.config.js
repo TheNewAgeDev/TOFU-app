@@ -5,9 +5,6 @@ module.exports = {
   orientation: 'portrait',
   icon: './assets/icon.png',
   userInterfaceStyle: 'automatic',
-  extra: {
-    apiUrl: process.env.API_URL
-  },
   splash: {
     image: './assets/splash.png',
     resizeMode: 'contain',

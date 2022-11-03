@@ -1,8 +1,7 @@
-import Constants from 'expo-constants'
+import { API_URL } from '@env'
 
 const useUser = () => {
-  const apiUrl = Constants.expoConfig.extra.apiUrl
-  console.log(apiUrl)
+  console.log(API_URL)
 
   return {}
 }
