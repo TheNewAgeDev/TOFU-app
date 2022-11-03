@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
+import useUser from 'hooks/useUser'
+
 import Card from 'components/Cards/Main'
 import Button from 'components/Styled/Button'
 import Input from 'components/Styled/Input'
@@ -9,6 +11,7 @@ import { hp } from 'utils'
 
 const handleLogin = (navigation) => {
   navigation.navigate('program')
+  useUser()
 }
 
 const CardForm = () => {
