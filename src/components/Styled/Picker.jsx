@@ -14,13 +14,14 @@ const pickerItems = (options) => {
       key={option.id}
       label={option.label}
       value={option.value}
+      {...option}
     />
   )
 }
 
 const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
-  const { styles } = useTheme(getStyles)
-  const [selectedLanguage, setSelectedLanguage] = useState('xd')
+  const { styles, theme } = useTheme(getStyles)
+  const [selectedLanguage, setSelectedLanguage] = useState('default')
 
   const ButtonStyles = [
     styles.container,
@@ -39,6 +40,10 @@ const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
         </View>
 
         <Picker
+          mode='dialog'
+          numberOfLines={1}
+          dropdownIconRippleColor={theme.colors.secondary}
+          dropdownIconColor='#565656'
           style={styles.input}
           selectedValue={selectedLanguage}
           onValueChange={handleChange}

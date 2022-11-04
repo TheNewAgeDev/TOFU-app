@@ -6,6 +6,7 @@ import Card from 'components/Cards/Main'
 import Button from 'components/Styled/Button'
 import Picker from 'components/Styled/Picker'
 
+import useTheme from 'hooks/useTheme'
 import { hp } from 'utils'
 
 const handleProgram = (navigation) => {
@@ -13,15 +14,30 @@ const handleProgram = (navigation) => {
 }
 
 const CardForm = () => {
+  const { styles, theme, isDark } = useTheme(getStyles)
+  const { black, white } = theme.colors
+
   const navigation = useNavigation()
-  const programs = useSelector(state => state.user.programs.map(item => {
-    return { id: item.id, label: item.name, value: item.slug }
+  const programs = useSelector(state => state.user.programs.map((item, index) => {
+    return {
+      id: item.id,
+      label: item.name,
+      value: item.slug,
+      style: {
+        backgroundColor: theme.colors.backgroundPrimary,
+        color: isDark ? white : black
+      }
+    }
   }))
 
   const DEFAULT = {
     id: 1,
     label: 'Elija su programa',
-    value: 'default'
+    value: 'default',
+    style: {
+      backgroundColor: theme.colors.backgroundPrimary,
+      color: isDark ? white : black
+    }
   }
 
   return (
@@ -50,7 +66,7 @@ const CardForm = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = theme => StyleSheet.create({
   buttonStyles: {
     marginTop: hp('8%')
   },
