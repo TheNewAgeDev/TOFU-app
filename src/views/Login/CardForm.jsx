@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
@@ -12,14 +13,16 @@ import { hp } from 'utils'
 
 const CardForm = () => {
   const navigation = useNavigation()
-  const { loginUser } = useUser()
+  const { isAuth, loginUser } = useUser()
 
   const [inputValue, onChangeInput] = useInput('')
   const [passwordValue, onChangePass] = useInput('')
 
-  const handleLogin = () => {
-    navigation.navigate('program')
+  useEffect(() => {
+    if (isAuth) navigation.navigate('program')
+  }, [isAuth])
 
+  const handleLogin = () => {
     loginUser({
       email: inputValue,
       password: passwordValue

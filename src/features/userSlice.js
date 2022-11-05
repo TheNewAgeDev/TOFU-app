@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  isAuth: false,
   id: '1509234566',
   name: 'Luis',
   lastname: 'Lopez Rueda',
@@ -139,16 +140,15 @@ const initialState = {
   rol: 'student'
 }
 
-export const taskSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    increment: (state) => {},
-    decrement: (state) => {},
-    incrementByAmount: (state, action) => {}
+    login: (state) => { state.isAuth = true },
+    logout: (state) => { state.isAuth = false }
   }
 })
 
-export const { increment, decrement, incrementByAmount } = taskSlice.actions
+export const { login, logout } = userSlice.actions
 
-export default taskSlice.reducer
+export default userSlice.reducer
