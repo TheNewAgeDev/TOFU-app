@@ -6,7 +6,7 @@ import { wp, hp, setOpacity } from 'utils'
 
 import Text from 'components/Styled/Text'
 
-const StyledInput = ({ label, icon, placeholder, style, ...restOfProps }) => {
+const StyledInput = ({ value, label, icon, placeholder, style, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
 
   const ButtonStyles = [
@@ -57,7 +57,7 @@ const getStyles = (theme, isDark) => {
       color: isDark ? white : black,
       width: wp('50%'),
       height: hp('6%'),
-      paddingLeft: 10,
+      paddingHorizontal: 10,
 
       borderBottomRightRadius: 50,
       borderTopRightRadius: 50,
