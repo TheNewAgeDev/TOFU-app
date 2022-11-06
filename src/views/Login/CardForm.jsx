@@ -25,7 +25,11 @@ const CardForm = () => {
 
   useEffect(() => {
     if (isAuth) navigation.navigate('program')
-  }, [isAuth])
+    if (status === 'success') {
+      onChangeInput('')
+      onChangePass('')
+    }
+  }, [isAuth, status])
 
   const isLoading = status === 'loading'
 
