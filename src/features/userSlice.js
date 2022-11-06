@@ -1,7 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import useStorage from 'hooks/useStorage'
 
 const initialState = {
   isAuth: false,
+  token: {
+    access_token: null,
+    token_type: null
+  },
+
   id: '1509234566',
   name: 'Luis',
   lastname: 'Lopez Rueda',
@@ -140,15 +146,36 @@ const initialState = {
   rol: 'student'
 }
 
+export const login = createAsyncThunk(
+  'users/login',
+  async (data) => {
+    const { getStorage, setStorage } = useStorage()
+
+    await setStorage('@accessToken', JSON.stringify(data))
+    const saveToken = await getStorage('@accessToken')
+
+    return {
+      saveToken
+    }
+  }
+)
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state) => { state.isAuth = true },
     logout: (state) => { state.isAuth = false }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      const { saveToken } = action.payload
+
+      state.isAuth = true
+      state.token = saveToken
+    })
   }
 })
 
-export const { login, logout } = userSlice.actions
+export const { logout } = userSlice.actions
 
 export default userSlice.reducer
