@@ -2,11 +2,12 @@ import { Text, StyleSheet } from 'react-native'
 
 import useTheme from 'hooks/useTheme'
 
-const StyledText = ({ children, style }) => {
+const StyledText = ({ children, style, type }) => {
   const { styles } = useTheme(getStyles)
 
   const textStyles = [
     styles.container,
+    type === 'error' && styles.error,
     style
   ]
 
@@ -20,6 +21,9 @@ const StyledText = ({ children, style }) => {
 const getStyles = theme => StyleSheet.create({
   container: {
     color: theme.colors.tertiary
+  },
+  error: {
+    color: theme.colors.error
   }
 })
 

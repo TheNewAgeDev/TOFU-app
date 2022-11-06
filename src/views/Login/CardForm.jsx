@@ -13,10 +13,12 @@ import Input from 'components/Styled/Input'
 
 import { hp } from 'utils'
 
+const EXCLUDE_STATUS = ['loading', 'success']
+
 const CardForm = () => {
   const navigation = useNavigation()
   const { isAuth, loginUser } = useUser()
-  const { statusMessage, setStatus } = useStatus()
+  const { status, statusMessage, setStatus } = useStatus()
 
   const [inputValue, onChangeInput] = useInput('')
   const [passwordValue, onChangePass] = useInput('')
@@ -55,19 +57,31 @@ const CardForm = () => {
         />
       </Card>
 
-      <Text>{statusMessage}</Text>
+      <Text type='error' style={styles.alert}>
+        {!EXCLUDE_STATUS.includes(status) && statusMessage}
+      </Text>
 
-      <Button onPress={handleLogin} iconRight='arrow-right' style={styles.buttonStyles}>Iniciar sesión</Button>
+      <Button
+        disabled={status === 'loading'}
+        onPress={handleLogin}
+        iconRight='arrow-right'
+        style={styles.buttonStyles}
+      >
+        Iniciar sesión
+      </Button>
     </>
   )
 }
 
 const styles = StyleSheet.create({
   buttonStyles: {
-    marginTop: hp('8%')
+    marginTop: hp('4%')
+  },
+  alert: {
+    marginTop: hp('4%')
   },
   input: {
-    marginBottom: hp('2%')
+    marginBottom: hp('3%')
   }
 })
 

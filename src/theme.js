@@ -46,7 +46,7 @@ export const THEME_DARK = {
     secondary: '#0A9640',
     tertiary: '#FFFFFF',
     quaternary: '#555555',
-    error: '#aa2211',
+    error: '#E6B0AA',
 
     white: '#FFFFFF',
     black: '#000000'
