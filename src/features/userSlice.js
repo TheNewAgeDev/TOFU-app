@@ -7,6 +7,7 @@ const initialState = {
     access_token: null,
     token_type: null
   },
+  selectProgram: null,
 
   id: '1509234566',
   name: 'Luis',
@@ -151,9 +152,15 @@ export const verify = createAsyncThunk(
   async () => {
     const { getStorage } = useStorage()
     const saveToken = JSON.parse(await getStorage('@accessToken'))
+    let selectProgram = await getStorage('@selectProgram')
+
+    const isValidate = !!(saveToken && saveToken.access_token && saveToken.token_type)
+    if (!isValidate) selectProgram = null
 
     return {
-      saveToken
+      isValidate,
+      saveToken,
+      selectProgram
     }
   }
 )
@@ -178,6 +185,20 @@ export const logout = createAsyncThunk(
     const { setStorage } = useStorage()
 
     await setStorage('@accessToken', JSON.stringify({}))
+    await setStorage('@selectProgram', null)
+  }
+)
+
+export const selectProgram = createAsyncThunk(
+  'user/selectProgram',
+  async (program) => {
+    const { setStorage } = useStorage()
+
+    await setStorage('@selectProgram', program)
+
+    return {
+      program
+    }
   }
 )
 
@@ -187,11 +208,11 @@ export const userSlice = createSlice({
   reducers: { },
   extraReducers: (builder) => {
     builder.addCase(verify.fulfilled, (state, action) => {
-      const { saveToken } = action.payload
-      const isValidate = !!(saveToken && saveToken.access_token && saveToken.token_type)
+      const { isValidate, saveToken, selectProgram } = action.payload
 
       state.isAuth = isValidate
       state.token = isValidate ? saveToken : {}
+      state.selectProgram = selectProgram
     })
 
     builder.addCase(login.fulfilled, (state, action) => {
@@ -204,6 +225,13 @@ export const userSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.isAuth = false
       state.token = null
+      state.selectProgram = null
+    })
+
+    builder.addCase(selectProgram.fulfilled, (state, action) => {
+      const { program } = action.payload
+
+      state.selectProgram = program
     })
   }
 })

@@ -1,23 +1,26 @@
+import { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'
+
+import useStatus from 'hooks/useStatus'
+import useUser from 'hooks/useUser'
+import useTheme from 'hooks/useTheme'
 
 import Card from 'components/Cards/Main'
 import Button from 'components/Styled/Button'
 import Picker from 'components/Styled/Picker'
+import Text from 'components/Styled/Text'
 
-import useTheme from 'hooks/useTheme'
 import { hp } from 'utils'
-
-const handleProgram = (navigation) => {
-  navigation.navigate('user')
-}
 
 const CardForm = () => {
   const { styles, theme, isDark } = useTheme(getStyles)
+  const [selectedProgram, setSelectedProgram] = useState('default')
+
+  const { selectProgram } = useUser()
+  const { statusMessage, setStatus } = useStatus()
   const { black, white } = theme.colors
 
-  const navigation = useNavigation()
   const programs = useSelector(state => state.user.programs.map((item, index) => {
     return {
       id: item.id,
@@ -29,6 +32,13 @@ const CardForm = () => {
       }
     }
   }))
+
+  const handleChange = (itemValue) => setSelectedProgram(itemValue)
+
+  const handleProgram = () => {
+    setStatus('')
+    selectProgram(selectedProgram, setStatus)
+  }
 
   const DEFAULT = {
     id: 1,
@@ -48,6 +58,8 @@ const CardForm = () => {
           icon='vcard'
           placeholder='Elija su programa'
           style={styles.input}
+          selectedValue={selectedProgram}
+          onValueChange={handleChange}
           options={[
             DEFAULT,
             ...programs
@@ -55,8 +67,12 @@ const CardForm = () => {
         />
       </Card>
 
+      <Text type='error' style={styles.alert}>
+        {statusMessage}
+      </Text>
+
       <Button
-        onPress={() => handleProgram(navigation)}
+        onPress={handleProgram}
         iconRight='arrow-right'
         style={styles.buttonStyles}
       >
@@ -68,7 +84,10 @@ const CardForm = () => {
 
 const getStyles = theme => StyleSheet.create({
   buttonStyles: {
-    marginTop: hp('8%')
+    marginTop: hp('4%')
+  },
+  alert: {
+    marginTop: hp('4%')
   },
   input: {
     marginBottom: hp('2%')

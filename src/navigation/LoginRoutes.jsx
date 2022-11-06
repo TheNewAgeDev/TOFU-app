@@ -11,16 +11,19 @@ import { screenOptions } from '#/navigation/CustomNavs'
 
 const InitialRoutes = () => {
   const { theme } = useTheme()
-  const { isAuth } = useUser()
+  const { isAuth, isSelectProgram } = useUser()
 
   const AuthRoutes = (
     <>
-      <Stack.Screen
-        name='program'
-        options={{ title: 'Seleccionar Programa | Evaluación Docente' }}
-        component={Program}
-      />
-      <Stack.Screen name='user' options={{ title: 'Evaluación Docente' }} component={UserRoutes} />
+      {
+      isSelectProgram
+        ? <Stack.Screen name='user' options={{ title: 'Evaluación Docente' }} component={UserRoutes} />
+        : <Stack.Screen
+            name='program'
+            options={{ title: 'Seleccionar Programa | Evaluación Docente' }}
+            component={Program}
+          />
+      }
     </>
   )
 

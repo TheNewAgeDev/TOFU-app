@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { FontAwesome } from '@expo/vector-icons'
@@ -21,14 +20,11 @@ const pickerItems = (options) => {
 
 const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
   const { styles, theme } = useTheme(getStyles)
-  const [selectedLanguage, setSelectedLanguage] = useState('default')
 
   const ButtonStyles = [
     styles.container,
     style
   ]
-
-  const handleChange = (itemValue) => setSelectedLanguage(itemValue)
 
   return (
     <>
@@ -45,8 +41,6 @@ const StyledInput = ({ label, icon, options = [], style, ...restOfProps }) => {
           dropdownIconRippleColor={theme.colors.secondary}
           dropdownIconColor='#565656'
           style={styles.input}
-          selectedValue={selectedLanguage}
-          onValueChange={handleChange}
           {...restOfProps}
         >
           {pickerItems(options)}

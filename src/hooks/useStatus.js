@@ -13,11 +13,11 @@ const useStatus = (initialValue = '') => {
     return STATUS_MESSAGES[initialValue] || ''
   })
 
-  const setStatus = (newStatus, message) => {
+  const setStatus = (newStatus, message = '') => {
     const newMessage = message || STATUS_MESSAGES[newStatus] || statusMessage
     setStatusValue(newStatus)
 
-    setStatusMessage(newMessage)
+    setStatusMessage(newStatus === '' ? '' : newMessage)
   }
 
   return { status, statusMessage, setStatus }
