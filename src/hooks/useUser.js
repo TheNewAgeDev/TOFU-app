@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { API_URL } from '@env'
 
-import { login, logout, selectProgram as selectProgramReducer } from 'features/userSlice'
+import { login, logout, changeSelectProgram, selectProgram as selectProgramReducer } from 'features/userSlice'
 
 const VALID_EMAIL = /^(([^<>()[\]\\.,;:\s@”]+(\.[^<>()[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -58,6 +58,16 @@ const useUser = () => {
     })
   }
 
+  const changeProgram = async () => {
+    const dispatchReturn = dispatch(changeSelectProgram())
+
+    return new Promise((resolve, reject) => {
+      dispatchReturn.then(
+        () => resolve('')
+      )
+    })
+  }
+
   const selectProgram = async (program, setStatus) => {
     if (program === 'default') return setStatus('noSelect', 'Por favor, elija su programa')
     dispatch(selectProgramReducer(program))
@@ -66,9 +76,11 @@ const useUser = () => {
   return {
     isAuth: user.isAuth,
     isSelectProgram: user.selectProgram,
+
     loginUser,
     logoutUser,
-    selectProgram
+    selectProgram,
+    changeProgram
   }
 }
 

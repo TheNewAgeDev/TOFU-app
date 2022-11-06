@@ -32,7 +32,7 @@ const ButtonLink = ({ icon, typeIcon, children, ...restOfProps }) => {
 
 const SettingsComponent = ({ modalVisible, toggleModal }) => {
   const { styles } = useTheme(getStyles)
-  const { logoutUser } = useUser()
+  const { logoutUser, changeProgram } = useUser()
 
   if (!modalVisible) return null
 
@@ -41,12 +41,17 @@ const SettingsComponent = ({ modalVisible, toggleModal }) => {
     toggleModal(true)
   }
 
+  const handleProgram = async () => {
+    await changeProgram()
+    toggleModal(true)
+  }
+
   return (
     <View style={styles.containerModal}>
       <ButtonLink typeIcon='entypo' icon='help-with-circle'>Ayuda</ButtonLink>
       <ButtonLink typeIcon='ant-design' icon='infocirlce'>Acerca de</ButtonLink>
       <ButtonLink typeIcon='ionicons' icon='md-moon'>Modo Oscuro</ButtonLink>
-      <ButtonLink typeIcon='ant-design' icon='retweet'>Cambiar Programa</ButtonLink>
+      <ButtonLink typeIcon='ant-design' icon='retweet' onPress={handleProgram}>Cambiar Programa</ButtonLink>
       <ButtonLink typeIcon='entypo' icon='log-out' onPress={handleSesion}>Cerrar Sesión</ButtonLink>
     </View>
   )

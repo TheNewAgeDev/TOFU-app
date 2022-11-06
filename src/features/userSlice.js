@@ -182,10 +182,10 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk(
   'user/logout',
   async () => {
-    const { setStorage } = useStorage()
+    const { removeStorage } = useStorage()
 
-    await setStorage('@accessToken', JSON.stringify({}))
-    await setStorage('@selectProgram', null)
+    await removeStorage('@accessToken')
+    await removeStorage('@selectProgram')
   }
 )
 
@@ -199,6 +199,15 @@ export const selectProgram = createAsyncThunk(
     return {
       program
     }
+  }
+)
+
+export const changeSelectProgram = createAsyncThunk(
+  'user/changeSelectProgram',
+  async () => {
+    const { removeStorage } = useStorage()
+
+    await removeStorage('@selectProgram')
   }
 )
 
@@ -232,6 +241,10 @@ export const userSlice = createSlice({
       const { program } = action.payload
 
       state.selectProgram = program
+    })
+
+    builder.addCase(changeSelectProgram.fulfilled, (state) => {
+      state.selectProgram = null
     })
   }
 })
