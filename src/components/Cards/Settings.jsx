@@ -1,5 +1,4 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { Entypo, AntDesign, Ionicons } from '@expo/vector-icons'
 
 import StyledText from 'components/Styled/Text'
@@ -33,15 +32,13 @@ const ButtonLink = ({ icon, typeIcon, children, ...restOfProps }) => {
 
 const SettingsComponent = ({ modalVisible, toggleModal }) => {
   const { styles } = useTheme(getStyles)
-  const navigation = useNavigation()
   const { logoutUser } = useUser()
 
   if (!modalVisible) return null
 
-  const handleSesion = () => {
-    logoutUser()
+  const handleSesion = async () => {
+    await logoutUser()
     toggleModal(true)
-    navigation.navigate('login')
   }
 
   return (

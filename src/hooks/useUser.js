@@ -48,8 +48,14 @@ const useUser = () => {
     }
   }
 
-  const logoutUser = () => {
-    dispatch(logout())
+  const logoutUser = async () => {
+    const dispatchReturn = dispatch(logout())
+
+    return new Promise((resolve, reject) => {
+      dispatchReturn.then(
+        () => resolve('')
+      )
+    })
   }
 
   return {
