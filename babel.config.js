@@ -8,7 +8,8 @@ module.exports = function (api) {
         {
           envName: 'APP_ENV',
           moduleName: '@env',
-          path: '.env.local'
+          path: '.env.local',
+          safe: true
         }
       ],
       [

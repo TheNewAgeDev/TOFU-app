@@ -1,11 +1,10 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Entypo, AntDesign, Ionicons } from '@expo/vector-icons'
-import { useDispatch } from 'react-redux'
 
 import StyledText from 'components/Styled/Text'
 
-import { logout } from 'features/userSlice'
+import useUser from 'hooks/useUser'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
@@ -35,12 +34,12 @@ const ButtonLink = ({ icon, typeIcon, children, ...restOfProps }) => {
 const SettingsComponent = ({ modalVisible, toggleModal }) => {
   const { styles } = useTheme(getStyles)
   const navigation = useNavigation()
-  const dispatch = useDispatch()
+  const { logoutUser } = useUser()
 
   if (!modalVisible) return null
 
   const handleSesion = () => {
-    dispatch(logout())
+    logoutUser()
     toggleModal(true)
     navigation.navigate('login')
   }

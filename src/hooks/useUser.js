@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { API_URL } from '@env'
 
-import { login } from 'features/userSlice'
+import { login, logout } from 'features/userSlice'
+
+const VALID_EMAIL = /^(([^<>()[\]\\.,;:\s@”]+(\.[^<>()[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
 
 const useUser = () => {
   const dispatch = useDispatch()
@@ -11,7 +13,7 @@ const useUser = () => {
     console.log(API_URL) // Verificar la url del backend
 
     if (!email && !password) return setStatus('noData')
-    if (!email) return setStatus('noEmail', 'Por favor, ingrese el correo')
+    if (!email || !VALID_EMAIL.test(email)) return setStatus('noEmail', 'Por favor, ingrese un correo valido')
     if (!password) return setStatus('noPassword', 'Por favor, ingrese la contraseña')
 
     const bodyJson = {
@@ -46,9 +48,14 @@ const useUser = () => {
     }
   }
 
+  const logoutUser = () => {
+    dispatch(logout())
+  }
+
   return {
     isAuth: user.isAuth,
-    loginUser
+    loginUser,
+    logoutUser
   }
 }
 
