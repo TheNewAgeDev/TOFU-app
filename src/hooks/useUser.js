@@ -4,6 +4,8 @@ import { API_URL } from '@env'
 import { login } from 'features/userSlice'
 
 const useUser = () => {
+  console.log(API_URL) // Verificar la url del backend
+
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 

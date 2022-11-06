@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import useUser from 'hooks/useUser'
@@ -26,6 +26,8 @@ const CardForm = () => {
   useEffect(() => {
     if (isAuth) navigation.navigate('program')
   }, [isAuth])
+
+  const isLoading = status === 'loading'
 
   const handleLogin = () => {
     loginUser({
@@ -57,12 +59,18 @@ const CardForm = () => {
         />
       </Card>
 
-      <Text type='error' style={styles.alert}>
-        {!EXCLUDE_STATUS.includes(status) && statusMessage}
-      </Text>
+      {
+      isLoading
+        ? <ActivityIndicator size='large' style={styles.loader} />
+        : (
+          <Text type='error' style={styles.alert}>
+            {!EXCLUDE_STATUS.includes(status) && statusMessage}
+          </Text>
+          )
+      }
 
       <Button
-        disabled={status === 'loading'}
+        disabled={isLoading}
         onPress={handleLogin}
         iconRight='arrow-right'
         style={styles.buttonStyles}
@@ -78,6 +86,9 @@ const styles = StyleSheet.create({
     marginTop: hp('4%')
   },
   alert: {
+    marginTop: hp('4%')
+  },
+  loader: {
     marginTop: hp('4%')
   },
   input: {

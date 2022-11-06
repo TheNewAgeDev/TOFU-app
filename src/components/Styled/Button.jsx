@@ -11,8 +11,8 @@ const StyledButton = ({ children, iconLeft, iconRight, style, disabled, ...restO
 
   const ButtonStyle = [
     styles.container,
-    style,
-    disabled && styles.disabled
+    disabled && styles.disabled,
+    style
   ]
 
   return (
@@ -35,7 +35,7 @@ const getStyles = theme => StyleSheet.create({
     elevation: 4
   },
   disabled: {
-    backgroundColor: setOpacity(theme.colors.primary, 20)
+    backgroundColor: setOpacity(theme.colors.secondary, 20)
   },
   iconLeft: {
     color: theme.colors.white,

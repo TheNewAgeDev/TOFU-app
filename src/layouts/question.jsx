@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 
 import useTheme from 'hooks/useTheme'
 import { nextCount, prevCount } from 'features/surveySlice'
-import { wp, hp } from 'utils'
+import { wp, hp, setOpacity } from 'utils'
 
 import Card from 'components/Cards/Secondary'
 import StyledText from 'components/Styled/Text'
@@ -41,7 +41,7 @@ const QuestionCard = ({ num, course, question }) => {
           onPress={handlePrev}
           disabled={num === 1}
           iconLeft='arrow-left'
-          style={styles.buttonBefore}
+          style={num === 1 ? styles.disableButtonBefore : styles.buttonBefore}
         >
           Anterior
         </Button>
@@ -81,6 +81,9 @@ const getStyles = theme => StyleSheet.create({
   },
   buttonBefore: {
     backgroundColor: theme.colors.backgroundSecondary
+  },
+  disableButtonBefore: {
+    backgroundColor: setOpacity(theme.colors.backgroundSecondary, 20)
   },
   progress: {
     marginTop: hp('1%'),
