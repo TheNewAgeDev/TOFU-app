@@ -3,10 +3,12 @@ import { StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import useUser from 'hooks/useUser'
+import useStatus from 'hooks/useStatus'
 import useInput from 'hooks/useInput'
 
 import Card from 'components/Cards/Main'
 import Button from 'components/Styled/Button'
+import Text from 'components/Styled/Text'
 import Input from 'components/Styled/Input'
 
 import { hp } from 'utils'
@@ -14,6 +16,7 @@ import { hp } from 'utils'
 const CardForm = () => {
   const navigation = useNavigation()
   const { isAuth, loginUser } = useUser()
+  const { statusMessage, setStatus } = useStatus()
 
   const [inputValue, onChangeInput] = useInput('')
   const [passwordValue, onChangePass] = useInput('')
@@ -26,7 +29,7 @@ const CardForm = () => {
     loginUser({
       email: inputValue,
       password: passwordValue
-    })
+    }, setStatus)
   }
 
   return (
@@ -51,6 +54,8 @@ const CardForm = () => {
           secureTextEntry
         />
       </Card>
+
+      <Text>{statusMessage}</Text>
 
       <Button onPress={handleLogin} iconRight='arrow-right' style={styles.buttonStyles}>Iniciar sesión</Button>
     </>

@@ -7,7 +7,11 @@ const useUser = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
-  const loginUser = async ({ email, password }) => {
+  const loginUser = async ({ email, password }, setStatus) => {
+    if (!email && !password) return setStatus('noData')
+    if (!email) return setStatus('noEmail', 'Por favor, ingrese el correo')
+    if (!password) return setStatus('noPassword', 'Por favor, ingrese la contraseña')
+
     const bodyJson = {
       email,
       password,
@@ -15,6 +19,8 @@ const useUser = () => {
     }
 
     try {
+      setStatus('loading')
+
       const res = await fetch(`${API_URL}/token`, {
         method: 'POST',
         headers: {
@@ -26,12 +32,14 @@ const useUser = () => {
 
       const data = await res.json()
       if (data && !data.errors) {
-        console.log('Loggeado :)')
+        setStatus('success')
         return dispatch(login(data))
       }
 
-      console.log('No Loggeado', data)
+      if (data.errors.email) return setStatus('errorEmail', 'Usuario no encontrado')
+      setStatus('errorPassword', 'Contraseña Incorrecta')
     } catch (error) {
+      setStatus('error')
       console.log('Ocurrio un Error => ', error)
     }
   }
