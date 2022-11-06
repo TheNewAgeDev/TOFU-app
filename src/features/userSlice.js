@@ -146,13 +146,11 @@ const initialState = {
   rol: 'student'
 }
 
-export const login = createAsyncThunk(
-  'users/login',
-  async (data) => {
-    const { getStorage, setStorage } = useStorage()
-
-    await setStorage('@accessToken', JSON.stringify(data))
-    const saveToken = await getStorage('@accessToken')
+export const verify = createAsyncThunk(
+  'user/verify',
+  async () => {
+    const { getStorage } = useStorage()
+    const saveToken = JSON.parse(await getStorage('@accessToken'))
 
     return {
       saveToken
@@ -160,22 +158,56 @@ export const login = createAsyncThunk(
   }
 )
 
+export const login = createAsyncThunk(
+  'user/login',
+  async (data) => {
+    const { getStorage, setStorage } = useStorage()
+
+    await setStorage('@accessToken', JSON.stringify(data))
+    const saveToken = JSON.parse(await getStorage('@accessToken'))
+
+    return {
+      saveToken
+    }
+  }
+)
+
+export const logout = createAsyncThunk(
+  'user/logout',
+  async () => {
+    const { setStorage } = useStorage()
+
+    await setStorage('@accessToken', JSON.stringify({}))
+  }
+)
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    logout: (state) => { state.isAuth = false }
-  },
+  reducers: { },
   extraReducers: (builder) => {
+    builder.addCase(verify.fulfilled, (state, action) => {
+      const { saveToken } = action.payload
+      const isValidate = !!(saveToken && saveToken.access_token && saveToken.token_type)
+
+      state.isAuth = isValidate
+      state.token = isValidate ? saveToken : {}
+    })
+
     builder.addCase(login.fulfilled, (state, action) => {
       const { saveToken } = action.payload
 
       state.isAuth = true
       state.token = saveToken
     })
+
+    builder.addCase(logout.fulfilled, (state) => {
+      state.isAuth = false
+      state.token = null
+    })
   }
 })
 
-export const { logout } = userSlice.actions
+/* export const { } = userSlice.actions */
 
 export default userSlice.reducer

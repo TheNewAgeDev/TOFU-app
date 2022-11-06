@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 
 import useTheme from 'hooks/useTheme'
+import { verify } from 'features/userSlice'
 import { setTheme } from 'features/settingSlice'
 import { themeNavigation } from '#/theme'
 
@@ -14,6 +15,8 @@ const Routes = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(verify())
+
     const suscribeAppearance = Appearance.addChangeListener(scheme => {
       dispatch(setTheme(scheme.colorScheme))
     })

@@ -4,12 +4,12 @@ import { API_URL } from '@env'
 import { login } from 'features/userSlice'
 
 const useUser = () => {
-  console.log(API_URL) // Verificar la url del backend
-
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
   const loginUser = async ({ email, password }, setStatus) => {
+    console.log(API_URL) // Verificar la url del backend
+
     if (!email && !password) return setStatus('noData')
     if (!email) return setStatus('noEmail', 'Por favor, ingrese el correo')
     if (!password) return setStatus('noPassword', 'Por favor, ingrese la contraseña')
