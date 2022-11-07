@@ -11,6 +11,8 @@ import Card from 'components/Cards/Secondary'
 import StyledText from 'components/Styled/Text'
 import Button from 'components/Styled/Button'
 
+import LittleStars from 'components/KindOfQuestions/LittleStars'
+
 const QuestionCard = ({ num, course, question }) => {
   const navigation = useNavigation()
   const { styles } = useTheme(getStyles)
@@ -34,6 +36,8 @@ const QuestionCard = ({ num, course, question }) => {
 
       <Card style={styles.content}>
         <StyledText>{question.description}</StyledText>
+
+        <LittleStars />
       </Card>
 
       <View style={styles.menu}>

@@ -16,13 +16,15 @@ module.exports = function (api) {
         'module-resolver',
         {
           alias: {
-            '#': './src',
             components: './src/components',
             hooks: './src/hooks',
             layouts: './src/layouts',
             views: './src/views',
             features: './src/features',
-            utils: './src/utils'
+            utils: './src/utils',
+
+            '#': './src',
+            assets: './assets'
           }
         }
       ]

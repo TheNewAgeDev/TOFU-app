@@ -4,6 +4,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "npm run reset-cache && expo start --clear",
+    "dev": "expo start",
 
     "android": "expo start --android",
     "ios": "expo start --ios",
