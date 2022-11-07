@@ -35,7 +35,9 @@ const QuestionCard = ({ num, course, question, setAnswer }) => {
       <StyledText style={styles.teacherName}>{course.teacher}</StyledText>
 
       <Card style={styles.content}>
-        <StyledText>{question}</StyledText>
+        <StyledText style={styles.textQuestion}>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laudantium eos consectetur nam sint facilis dolores rem soluta exercitationem non.
+        </StyledText>
 
         <LittleStars setAnswer={setAnswer} />
       </Card>
@@ -70,9 +72,15 @@ const getStyles = theme => StyleSheet.create({
     textAlign: 'center',
     marginTop: hp('1.5%')
   },
+  textQuestion: {
+    fontSize: hp('2.5%'),
+    textAlign: 'center',
+    marginBottom: hp('3%')
+  },
   content: {
-    marginVertical: hp('1.5%'),
     height: hp('74%'),
+
+    marginVertical: hp('1.5%'),
     marginHorizontal: wp('5%')
   },
   menu: {

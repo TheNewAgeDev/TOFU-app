@@ -20,6 +20,10 @@ const CardMain = ({ children, style, ...restOfProps }) => {
 
 const getStyles = theme => StyleSheet.create({
   container: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
     borderRadius: wp('2%'),
     padding: hp('4%'),
     shadowColor: '#D0CBCB',
