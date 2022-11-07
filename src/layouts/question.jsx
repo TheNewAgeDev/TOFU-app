@@ -13,6 +13,7 @@ import Button from 'components/Styled/Button'
 
 import LittleStars from 'components/KindOfQuestions/LittleStars'
 import NumericalRange from 'components/KindOfQuestions/NumericalRange'
+import SlideBar from 'components/KindOfQuestions/SlideBar'
 
 const QuestionCard = ({ num, course, question, setAnswer }) => {
   const navigation = useNavigation()
@@ -41,7 +42,9 @@ const QuestionCard = ({ num, course, question, setAnswer }) => {
         </StyledText>
 
         {
-          num === 1 ? <LittleStars setAnswer={setAnswer} /> : <NumericalRange setAnswer={setAnswer} />
+          num === 1
+            ? <LittleStars setAnswer={setAnswer} />
+            : num === 2 ? <NumericalRange setAnswer={setAnswer} /> : <SlideBar setAnswer={setAnswer} />
         }
       </Card>
 
