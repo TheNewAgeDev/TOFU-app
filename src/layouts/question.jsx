@@ -12,6 +12,7 @@ import StyledText from 'components/Styled/Text'
 import Button from 'components/Styled/Button'
 
 import LittleStars from 'components/KindOfQuestions/LittleStars'
+import NumericalRange from 'components/KindOfQuestions/NumericalRange'
 
 const QuestionCard = ({ num, course, question, setAnswer }) => {
   const navigation = useNavigation()
@@ -39,7 +40,9 @@ const QuestionCard = ({ num, course, question, setAnswer }) => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laudantium eos consectetur nam sint facilis dolores rem soluta exercitationem non.
         </StyledText>
 
-        <LittleStars setAnswer={setAnswer} />
+        {
+          num === 1 ? <LittleStars setAnswer={setAnswer} /> : <NumericalRange setAnswer={setAnswer} />
+        }
       </Card>
 
       <View style={styles.menu}>

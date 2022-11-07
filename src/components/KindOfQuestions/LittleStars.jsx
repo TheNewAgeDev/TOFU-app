@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { View, TouchableOpacity, Image, FlatList, StyleSheet } from 'react-native'
 
 import Text from 'components/Styled/Text'
@@ -10,9 +11,7 @@ import sincomentarios from 'assets/smiles/sincomentarios.png'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-let keyPress = null
-
-const ImageComponent = ({ onPress, image, label = '', value }) => {
+const ImageComponent = ({ keyPress, onPress, image, label = '', value }) => {
   const { styles } = useTheme(getStyles)
 
   const InputStyles = [
@@ -68,10 +67,11 @@ const SMILES = [
 
 const LittleStars = ({ setAnswer }) => {
   const { styles } = useTheme(getStyles)
+  const [keyPress, setKeyPress] = useState(null)
 
   const handlePress = (value) => {
     setAnswer(value)
-    keyPress = value
+    setKeyPress(value)
   }
 
   return (
@@ -81,7 +81,13 @@ const LittleStars = ({ setAnswer }) => {
         numColumns={2}
         columnWrapperStyle={{ justifyContent: 'space-between' }}
         renderItem={({ item }) => (
-          <ImageComponent onPress={handlePress} image={item.image} label={item.label} value={item.value} />
+          <ImageComponent
+            onPress={handlePress}
+            image={item.image}
+            label={item.label}
+            value={item.value}
+            keyPress={keyPress}
+          />
         )}
       />
     </View>
