@@ -5,6 +5,8 @@ import Text from 'components/Styled/Text'
 
 import emocionado from 'assets/smiles/emocionado.png'
 import bien from 'assets/smiles/bien.png'
+import feliz from 'assets/smiles/feliz.png'
+import sincomentarios from 'assets/smiles/sincomentarios.png'
 
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
@@ -50,6 +52,16 @@ const SMILES = [
     label: 'Siempre',
     image: emocionado,
     value: 4
+  },
+  {
+    label: 'Muchas Veces',
+    image: feliz,
+    value: 3
+  },
+  {
+    label: 'Nunca',
+    image: sincomentarios,
+    value: 1
   }
 ]
 

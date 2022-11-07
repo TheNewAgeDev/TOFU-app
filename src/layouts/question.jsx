@@ -11,6 +11,7 @@ import Card from 'components/Cards/Secondary'
 import StyledText from 'components/Styled/Text'
 import Button from 'components/Styled/Button'
 
+import SmileyFaces from 'components/KindOfQuestions/SmileyFaces'
 import LittleStars from 'components/KindOfQuestions/LittleStars'
 import NumericalRange from 'components/KindOfQuestions/NumericalRange'
 import SlideBar from 'components/KindOfQuestions/SlideBar'
@@ -44,10 +45,12 @@ const QuestionCard = ({ num, course, question, setAnswer }) => {
 
         {
           num === 1
-            ? <LittleStars setAnswer={setAnswer} />
+            ? <SmileyFaces setAnswer={setAnswer} />
             : num === 2
-              ? <NumericalRange setAnswer={setAnswer} />
-              : num === 3 ? <SlideBar setAnswer={setAnswer} /> : <DragAndDrop setAnswer={setAnswer} />
+              ? <LittleStars setAnswer={setAnswer} />
+              : num === 3
+                ? <NumericalRange setAnswer={setAnswer} />
+                : num === 4 ? <SlideBar setAnswer={setAnswer} /> : <DragAndDrop setAnswer={setAnswer} />
         }
       </Card>
 
