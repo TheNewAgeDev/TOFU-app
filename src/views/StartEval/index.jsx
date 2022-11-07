@@ -1,6 +1,6 @@
 import { StyleSheet, FlatList } from 'react-native'
-import { useSelector } from 'react-redux'
 
+import useCourses from 'hooks/useCourses'
 import useTheme from 'hooks/useTheme'
 import useModal from 'hooks/useModal'
 import { wp, hp } from 'utils'
@@ -10,7 +10,7 @@ import Course from 'components/Cards/Course'
 const Home = () => {
   const { styles } = useTheme(getStyles)
   const { Modal } = useModal()
-  const courses = useSelector(state => state.user.courses.filter(course => course.state === 'start'))
+  const { courses } = useCourses('start')
 
   return (
     <>
