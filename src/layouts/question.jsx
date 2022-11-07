@@ -13,7 +13,7 @@ import Button from 'components/Styled/Button'
 
 import LittleStars from 'components/KindOfQuestions/LittleStars'
 
-const QuestionCard = ({ num, course, question }) => {
+const QuestionCard = ({ num, course, question, setAnswer }) => {
   const navigation = useNavigation()
   const { styles } = useTheme(getStyles)
   const dispatch = useDispatch()
@@ -35,9 +35,9 @@ const QuestionCard = ({ num, course, question }) => {
       <StyledText style={styles.teacherName}>{course.teacher}</StyledText>
 
       <Card style={styles.content}>
-        <StyledText>{question.description}</StyledText>
+        <StyledText>{question}</StyledText>
 
-        <LittleStars />
+        <LittleStars setAnswer={setAnswer} />
       </Card>
 
       <View style={styles.menu}>

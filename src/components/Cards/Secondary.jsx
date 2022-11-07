@@ -22,11 +22,10 @@ const getStyles = theme => StyleSheet.create({
   container: {
     borderRadius: wp('2%'),
     padding: hp('4%'),
-    shadowColor: '#BCB9B9',
-    shadowOffset: { width: 10, height: 2 },
+    shadowColor: '#D0CBCB',
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 2
+    elevation: 4
   }
 })
 
