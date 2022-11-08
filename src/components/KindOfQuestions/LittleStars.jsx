@@ -3,6 +3,7 @@ import { View, TouchableOpacity, FlatList, StyleSheet } from 'react-native'
 
 import Star from 'components/Icons/star'
 import StarSelect from 'components/Icons/starSelect'
+import Text from 'components/Styled/Text'
 
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
@@ -14,7 +15,7 @@ const ImageComponent = ({ keyPress, onPress, value }) => {
 
   return (
     <TouchableOpacity style={styles.imgStyles} onPress={() => onPress(value)}>
-      <SelectStar width={wp('16%')} height={hp('10%')} />
+      <SelectStar width={wp('16%')} height={hp('9%')} />
     </TouchableOpacity>
   )
 }
@@ -56,6 +57,18 @@ const LittleStars = ({ setAnswer }) => {
           />
         )}
       />
+
+      <Text style={styles.textDescription}>
+        {
+          keyPress === 1
+            ? 'Nunca'
+            : keyPress === 2
+              ? 'Algunas Veces'
+              : keyPress === 3
+                ? 'Muchas Veces'
+                : keyPress === 4 && 'Siempre'
+        }
+      </Text>
     </View>
   )
 }
@@ -64,8 +77,13 @@ const getStyles = theme => StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: hp('10%'),
+    height: hp('15%'),
     width: wp('75%')
+  },
+  textDescription: {
+    marginTop: hp('2%'),
+    fontSize: hp('3%'),
+    fontWeight: '500'
   },
   imgStyles: {
     paddingHorizontal: wp('1%')
