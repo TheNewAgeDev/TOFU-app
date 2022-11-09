@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { StyleSheet, View, PanResponder, Animated } from 'react-native'
+import { StyleSheet, View, Image, PanResponder, Animated } from 'react-native'
 
 import Text from 'components/Styled/Text'
 
@@ -11,12 +11,12 @@ import sincomentarios from 'assets/smiles/sincomentarios.png'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const Draggable = () => {
+const Draggable = ({ image }) => {
   const { styles } = useTheme(getStyles)
-  const [stateDrag, setStateDrag] = useState({
+  const [stateDrag] = useState({
     showDraggable: true,
     dropAreaValues: null,
-    opacity: new Animated.Value(0.5)
+    opacity: new Animated.Value(0.9)
   })
 
   const pan = useRef(new Animated.ValueXY()).current
@@ -36,8 +36,9 @@ const Draggable = () => {
         ],
         { useNativeDriver: false }
       ),
-      onPanResponderRelease: () => {
+      onPanResponderRelease: (e, gesture) => {
         pan.flattenOffset()
+        pan.setValue({ x: 0, y: 0 })
       }
     })
   ).current
@@ -52,8 +53,14 @@ const Draggable = () => {
         <View style={{ position: 'absolute' }}>
           <Animated.View
             {...panResponder.panHandlers}
-            style={[panStyle, styles.circle, { opacity: stateDrag.opacity }]}
-          />
+            style={[panStyle, styles.containerDrag, { opacity: stateDrag.opacity }]}
+          >
+            <Image
+              style={styles.imageStyle}
+              source={image}
+              resizeMode='contain'
+            />
+          </Animated.View>
         </View>
       )
     }
@@ -72,10 +79,10 @@ const DragAndDrop = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.row}>
-        <Draggable />
-        <Draggable />
-        <Draggable />
-        <Draggable />
+        <Draggable image={bien} />
+        <Draggable image={feliz} />
+        <Draggable image={emocionado} />
+        <Draggable image={sincomentarios} />
       </View>
 
       <View style={styles.response}>
@@ -87,31 +94,30 @@ const DragAndDrop = () => {
 
 const getStyles = theme => StyleSheet.create({
   mainContainer: {
-    width: wp('72%'),
-    height: hp('25%')
+    alignItems: 'center'
   },
   response: {
     top: hp('12%'),
     justifyContent: 'center',
     alignItems: 'center',
-    height: hp('15%'),
+    height: hp('13%'),
+    width: wp('42%'),
 
     borderRadius: wp('2%'),
-    shadowColor: '#454547',
-    shadowOpacity: 0.2,
+    shadowColor: '#000000',
+    shadowOpacity: 0.9,
     shadowRadius: 1,
-    elevation: 1.4
+    elevation: 1
   },
   itemDrag: {
     width: wp('18%'),
     zIndex: 9999,
     alignItems: 'center'
   },
-  circle: {
-    backgroundColor: 'skyblue',
-    width: 30 * 2,
-    height: 30 * 2,
-    borderRadius: 30
+  containerDrag: {},
+  imageStyle: {
+    width: wp('20%'),
+    height: hp('10%')
   },
   row: {
     flexDirection: 'row'
