@@ -11,7 +11,7 @@ import sincomentarios from 'assets/smiles/sincomentarios.png'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const Draggable = ({ image }) => {
+const Draggable = ({ image, text }) => {
   const { styles } = useTheme(getStyles)
   const [stateDrag] = useState({
     showDraggable: true,
@@ -60,6 +60,8 @@ const Draggable = ({ image }) => {
               source={image}
               resizeMode='contain'
             />
+
+            <Text style={styles.textItem}>{text}</Text>
           </Animated.View>
         </View>
       )
@@ -79,14 +81,14 @@ const DragAndDrop = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.row}>
-        <Draggable image={bien} />
-        <Draggable image={feliz} />
-        <Draggable image={emocionado} />
-        <Draggable image={sincomentarios} />
+        <Draggable image={bien} text='Algunas Veces' />
+        <Draggable image={feliz} text='Muchas Veces' />
+        <Draggable image={emocionado} text='Siempre' />
+        <Draggable image={sincomentarios} text='Nunca' />
       </View>
 
       <View style={styles.response}>
-        <Text>Arrastra aquí una opción</Text>
+        <Text style={styles.textResponse}>Arrastra aquí una opción</Text>
       </View>
     </View>
   )
@@ -94,30 +96,46 @@ const DragAndDrop = () => {
 
 const getStyles = theme => StyleSheet.create({
   mainContainer: {
-    alignItems: 'center'
+    alignItems: 'center',
+    height: hp('30%')
   },
   response: {
     top: hp('12%'),
     justifyContent: 'center',
     alignItems: 'center',
     height: hp('13%'),
-    width: wp('42%'),
+    width: wp('30%'),
 
     borderRadius: wp('2%'),
-    shadowColor: '#000000',
-    shadowOpacity: 0.9,
+    shadowColor: '#00000080',
+    shadowOpacity: 0.2,
     shadowRadius: 1,
     elevation: 1
+  },
+  textResponse: {
+    textAlign: 'center',
+    color: '#00000050'
   },
   itemDrag: {
     width: wp('18%'),
     zIndex: 9999,
     alignItems: 'center'
   },
-  containerDrag: {},
+  textItem: {
+    textAlign: 'center'
+  },
+  containerDrag: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: wp('25%'),
+    height: hp('11%'),
+    borderWidth: 1,
+    borderColor: '#00000010',
+    borderRadius: 15
+  },
   imageStyle: {
-    width: wp('20%'),
-    height: hp('10%')
+    width: wp('13%'),
+    height: hp('7%')
   },
   row: {
     flexDirection: 'row'
