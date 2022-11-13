@@ -35,10 +35,11 @@ const useUser = () => {
       })
 
       const data = await res.json()
-      if (data && !data.errors) {
+
+      if (data && data.access_token && !data.errors) {
         setStatus('success')
         return dispatch(login(data))
-      }
+      } else if (data && !data.errors) return setStatus('error')
 
       if (data.errors.email) return setStatus('errorEmail', 'Usuario no encontrado')
       setStatus('errorPassword', 'Contraseña Incorrecta')

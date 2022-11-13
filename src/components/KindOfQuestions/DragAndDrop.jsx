@@ -11,7 +11,7 @@ import sincomentarios from 'assets/smiles/sincomentarios.png'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const Draggable = ({ image, text }) => {
+const Draggable = ({ image, text, style }) => {
   const { styles } = useTheme(getStyles)
   const [stateDrag] = useState({
     showDraggable: true,
@@ -45,25 +45,24 @@ const Draggable = ({ image, text }) => {
 
   const renderDraggable = () => {
     const panStyle = {
+      ...style,
       transform: pan.getTranslateTransform()
     }
 
     if (stateDrag.showDraggable) {
       return (
-        <View style={{ position: 'absolute' }}>
-          <Animated.View
-            {...panResponder.panHandlers}
-            style={[panStyle, styles.containerDrag, { opacity: stateDrag.opacity }]}
-          >
-            <Image
-              style={styles.imageStyle}
-              source={image}
-              resizeMode='contain'
-            />
+        <Animated.View
+          {...panResponder.panHandlers}
+          style={[panStyle, styles.containerDrag, { opacity: stateDrag.opacity }]}
+        >
+          <Image
+            style={styles.imageStyle}
+            source={image}
+            resizeMode='contain'
+          />
 
-            <Text style={styles.textItem}>{text}</Text>
-          </Animated.View>
-        </View>
+          <Text style={styles.textItem}>{text}</Text>
+        </Animated.View>
       )
     }
   }
@@ -81,10 +80,12 @@ const DragAndDrop = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.row}>
-        <Draggable image={bien} text='Algunas Veces' />
-        <Draggable image={feliz} text='Muchas Veces' />
-        <Draggable image={emocionado} text='Siempre' />
-        <Draggable image={sincomentarios} text='Nunca' />
+        <Draggable style={{ marginRight: hp('5%') }} image={bien} text='Algunas Veces' />
+        <View style={styles.colRow}>
+          <Draggable image={feliz} text='Muchas Veces' />
+          <Draggable style={{ marginTop: hp('0.4%') }} image={emocionado} text='Siempre' />
+        </View>
+        <Draggable style={{ marginLeft: hp('5%') }} image={sincomentarios} text='Nunca' />
       </View>
 
       <View style={styles.response}>
@@ -96,15 +97,14 @@ const DragAndDrop = () => {
 
 const getStyles = theme => StyleSheet.create({
   mainContainer: {
-    alignItems: 'center',
-    height: hp('30%')
+    alignItems: 'center'
   },
   response: {
-    top: hp('12%'),
     justifyContent: 'center',
     alignItems: 'center',
-    height: hp('13%'),
-    width: wp('30%'),
+    height: hp('12%'),
+    width: wp('25%'),
+    marginTop: hp('3%'),
 
     borderRadius: wp('2%'),
     shadowColor: '#00000080',
@@ -122,13 +122,15 @@ const getStyles = theme => StyleSheet.create({
     alignItems: 'center'
   },
   textItem: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: hp('1.4%')
   },
   containerDrag: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: wp('25%'),
-    height: hp('11%'),
+    width: wp('22%'),
+    height: hp('10%'),
+
     borderWidth: 1,
     borderColor: '#00000010',
     borderRadius: 15
@@ -138,7 +140,10 @@ const getStyles = theme => StyleSheet.create({
     height: hp('7%')
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: wp('70%')
   }
 })
 
