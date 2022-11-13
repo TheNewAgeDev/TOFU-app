@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
 
@@ -17,9 +17,13 @@ const CardForm = () => {
   const { styles, theme, isDark } = useTheme(getStyles)
   const [selectedProgram, setSelectedProgram] = useState('default')
 
-  const { selectProgram } = useUser()
+  const { selectProgram, getPrograms } = useUser()
   const { statusMessage, setStatus } = useStatus()
   const { black, white } = theme.colors
+
+  useEffect(() => {
+    getPrograms()
+  }, [getPrograms])
 
   const programs = useSelector(state => state.user.programs.map((item, index) => {
     return {

@@ -3,6 +3,16 @@ import {
   selectProgram as selectProgramReducer
 } from 'features/userSlice'
 
+export const getPrograms = async (dispatch, sendFetch, token) => {
+  const data = await sendFetch({
+    route: '/me',
+    method: 'GET',
+    token
+  })
+
+  console.log(data)
+}
+
 export const removeProgram = async (dispatch) => {
   const dispatchReturn = dispatch(removeSelectProgram())
 

@@ -21,7 +21,6 @@ export const loginUser = async (dispatch, sendFetch, { email, password }, setSta
 
     const data = await sendFetch({
       route: '/token',
-      method: 'POST',
       bodyJson
     })
 

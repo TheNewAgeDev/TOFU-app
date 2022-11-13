@@ -6,14 +6,15 @@ const sendFetch = async ({ token, route = '/', method = 'POST', bodyJson = {} })
     'Content-Type': 'application/json'
   }
 
-  if (token) headers.Authorization = `${token.token_type} ${token.access_token}`
-
-  const res = await fetch(`${API_URL}${route}`, {
+  const configFetch = {
     method,
-    headers,
-    body: JSON.stringify(bodyJson)
-  })
+    headers
+  }
 
+  if (token) headers.Authorization = `${token.token_type} ${token.access_token}`
+  if (method !== 'GET') configFetch.body = JSON.stringify(bodyJson)
+
+  const res = await fetch(`${API_URL}${route}`, configFetch)
   return await res.json()
 }
 
