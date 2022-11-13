@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     marginTop: hp('4%')
   },
   alert: {
-    marginTop: hp('4%')
+    marginTop: hp('4%'),
+    textAlign: 'center'
   },
   loader: {
     marginTop: hp('4%')
