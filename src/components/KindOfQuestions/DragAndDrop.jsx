@@ -11,7 +11,7 @@ import sincomentarios from 'assets/smiles/sincomentarios.png'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const Draggable = ({ image, text, style }) => {
+const Draggable = ({ contentPan, image, text, style }) => {
   const { styles } = useTheme(getStyles)
   const [stateDrag] = useState({
     showDraggable: true,
@@ -38,59 +38,64 @@ const Draggable = ({ image, text, style }) => {
       ),
       onPanResponderRelease: (e, gesture) => {
         pan.flattenOffset()
-        pan.setValue({ x: 0, y: 0 })
+
+        contentPan.current.measure((x, y, width, height, pageX, pageY) => {
+          console.log(pageX, pageY)
+        })
+        console.log(gesture.moveX, gesture.moveY)
+
+        Animated.spring(
+          pan,
+          {
+            toValue: { x: 0, y: 0 },
+            useNativeDriver: false
+          }
+        ).start()
       }
     })
   ).current
 
-  const renderDraggable = () => {
-    const panStyle = {
-      ...style,
-      transform: pan.getTranslateTransform()
-    }
-
-    if (stateDrag.showDraggable) {
-      return (
-        <Animated.View
-          {...panResponder.panHandlers}
-          style={[panStyle, styles.containerDrag, { opacity: stateDrag.opacity }]}
-        >
-          <Image
-            style={styles.imageStyle}
-            source={image}
-            resizeMode='contain'
-          />
-
-          <Text style={styles.textItem}>{text}</Text>
-        </Animated.View>
-      )
-    }
+  const panStyle = {
+    ...style,
+    transform: pan.getTranslateTransform()
   }
 
   return (
     <View style={styles.itemDrag}>
-      {renderDraggable()}
+      <Animated.View
+        {...panResponder.panHandlers}
+        style={[panStyle, styles.containerDrag, { opacity: stateDrag.opacity }]}
+      >
+        <Image
+          style={styles.imageStyle}
+          source={image}
+          resizeMode='contain'
+        />
+
+        <Text style={styles.textItem}>{text}</Text>
+      </Animated.View>
     </View>
   )
 }
 
 const DragAndDrop = () => {
   const { styles } = useTheme(getStyles)
+  const pan = useRef()
 
   return (
     <View style={styles.mainContainer}>
       <View style={styles.row}>
-        <Draggable style={{ marginRight: hp('5%') }} image={bien} text='Algunas Veces' />
+        <Draggable style={{ marginRight: hp('5%') }} contentPan={pan} image={bien} text='Algunas Veces' />
         <View style={styles.colRow}>
-          <Draggable image={feliz} text='Muchas Veces' />
-          <Draggable style={{ marginTop: hp('0.4%') }} image={emocionado} text='Siempre' />
+          <Draggable contentPan={pan} image={feliz} text='Muchas Veces' />
+          <Draggable style={{ marginTop: hp('0.4%') }} contentPan={pan} image={emocionado} text='Siempre' />
         </View>
-        <Draggable style={{ marginLeft: hp('5%') }} image={sincomentarios} text='Nunca' />
+        <Draggable style={{ marginLeft: hp('5%') }} contentPan={pan} image={sincomentarios} text='Nunca' />
       </View>
 
-      <View style={styles.response}>
+      <Animated.View ref={pan} style={styles.response}>
         <Text style={styles.textResponse}>Arrastra aquí una opción</Text>
-      </View>
+      </Animated.View>
     </View>
   )
 }
