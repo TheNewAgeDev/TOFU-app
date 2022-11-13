@@ -11,10 +11,10 @@ import sincomentarios from 'assets/smiles/sincomentarios.png'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const Draggable = ({ contentPan, image, text, style }) => {
+const Draggable = ({ contentPan, image, text, value, style }) => {
   const { styles } = useTheme(getStyles)
   const [stateDrag] = useState({
-    showDraggable: true,
+    value,
     dropAreaValues: null,
     opacity: new Animated.Value(0.9)
   })
@@ -38,19 +38,27 @@ const Draggable = ({ contentPan, image, text, style }) => {
       ),
       onPanResponderRelease: (e, gesture) => {
         pan.flattenOffset()
+        const { moveX, moveY } = gesture
 
-        contentPan.current.measure((x, y, width, height, pageX, pageY) => {
-          console.log(pageX, pageY)
-        })
-        console.log(gesture.moveX, gesture.moveY)
+        contentPan.current.measure((_x, _y, width, height, pageX, pageY) => {
+          const initialPoint = [pageX, pageY]
+          const lastPoint = [pageX + wp('25%'), pageY + hp('12%')]
 
-        Animated.spring(
-          pan,
-          {
-            toValue: { x: 0, y: 0 },
-            useNativeDriver: false
+          const x = [initialPoint[0], lastPoint[0]]
+          const y = [initialPoint[1], lastPoint[1]]
+
+          if (moveX >= x[0] && moveX <= x[1] && moveY >= y[0] && moveY <= y[1]) {
+            return
           }
-        ).start()
+
+          Animated.spring(
+            pan,
+            {
+              toValue: { x: 0, y: 0 },
+              useNativeDriver: false
+            }
+          ).start()
+        })
       }
     })
   ).current
@@ -78,19 +86,42 @@ const Draggable = ({ contentPan, image, text, style }) => {
   )
 }
 
-const DragAndDrop = () => {
+const DragAndDrop = ({ setAnswer }) => {
   const { styles } = useTheme(getStyles)
   const pan = useRef()
 
   return (
     <View style={styles.mainContainer}>
       <View style={styles.row}>
-        <Draggable style={{ marginRight: hp('5%') }} contentPan={pan} image={bien} text='Algunas Veces' />
+        <Draggable
+          style={{ marginRight: hp('5%') }}
+          contentPan={pan}
+          image={bien}
+          value={2}
+          text='Algunas Veces'
+        />
         <View style={styles.colRow}>
-          <Draggable contentPan={pan} image={feliz} text='Muchas Veces' />
-          <Draggable style={{ marginTop: hp('0.4%') }} contentPan={pan} image={emocionado} text='Siempre' />
+          <Draggable
+            contentPan={pan}
+            image={feliz}
+            value={3}
+            text='Muchas Veces'
+          />
+          <Draggable
+            style={{ marginTop: hp('0.4%') }}
+            contentPan={pan}
+            image={emocionado}
+            value={4}
+            text='Siempre'
+          />
         </View>
-        <Draggable style={{ marginLeft: hp('5%') }} contentPan={pan} image={sincomentarios} text='Nunca' />
+        <Draggable
+          style={{ marginLeft: hp('5%') }}
+          contentPan={pan}
+          image={sincomentarios}
+          value={1}
+          text='Nunca'
+        />
       </View>
 
       <Animated.View ref={pan} style={styles.response}>
