@@ -1,13 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-import {
-  changeSelectProgram,
-  selectProgram as selectProgramReducer
-} from 'features/userSlice'
-
 import useFetch from 'hooks/useFetch'
 
 import { loginUser as login, logoutUser as logout } from './login'
+import { selectProgram as setProgram, removeProgram as delProgram } from './program'
 
 const useUser = () => {
   const dispatch = useDispatch()
@@ -16,21 +12,8 @@ const useUser = () => {
 
   const loginUser = (...args) => login(dispatch, sendFetch, ...args)
   const logoutUser = (...args) => logout(dispatch, sendFetch, user.token, ...args)
-
-  const changeProgram = async () => {
-    const dispatchReturn = dispatch(changeSelectProgram())
-
-    return new Promise((resolve, reject) => {
-      dispatchReturn.then(
-        () => resolve('')
-      )
-    })
-  }
-
-  const selectProgram = async (program, setStatus) => {
-    if (program === 'default') return setStatus('noSelect', 'Por favor, elija su programa')
-    dispatch(selectProgramReducer(program))
-  }
+  const selectProgram = (...args) => setProgram(dispatch, ...args)
+  const removeProgram = (...args) => delProgram(dispatch, ...args)
 
   return {
     isAuth: user.isAuth,
@@ -40,7 +23,7 @@ const useUser = () => {
     logoutUser,
 
     selectProgram,
-    changeProgram
+    removeProgram
   }
 }
 

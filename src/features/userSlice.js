@@ -88,7 +88,7 @@ export const selectProgram = createAsyncThunk(
   }
 )
 
-export const changeSelectProgram = createAsyncThunk(
+export const removeSelectProgram = createAsyncThunk(
   'user/changeSelectProgram',
   async () => {
     const { removeStorage } = useStorage()
@@ -129,7 +129,7 @@ export const userSlice = createSlice({
       state.selectProgram = program
     })
 
-    builder.addCase(changeSelectProgram.fulfilled, (state) => {
+    builder.addCase(removeSelectProgram.fulfilled, (state) => {
       state.selectProgram = null
     })
   }

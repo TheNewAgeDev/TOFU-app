@@ -32,7 +32,7 @@ const ButtonLink = ({ icon, typeIcon, children, ...restOfProps }) => {
 
 const SettingsComponent = ({ modalVisible, toggleModal }) => {
   const { styles } = useTheme(getStyles)
-  const { logoutUser, changeProgram } = useUser()
+  const { logoutUser, removeProgram } = useUser()
 
   if (!modalVisible) return null
 
@@ -42,7 +42,7 @@ const SettingsComponent = ({ modalVisible, toggleModal }) => {
   }
 
   const handleProgram = async () => {
-    await changeProgram()
+    await removeProgram()
     toggleModal(true)
   }
 
