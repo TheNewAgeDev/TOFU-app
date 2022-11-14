@@ -1,7 +1,7 @@
 import {
   login,
   logout
-} from 'features/userSlice'
+} from 'features/userSlice/thunks'
 
 import { VALID_EMAIL } from 'utils'
 

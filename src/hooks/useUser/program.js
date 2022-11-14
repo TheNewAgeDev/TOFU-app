@@ -1,7 +1,9 @@
 import {
   removeSelectProgram,
   selectProgram as selectProgramReducer
-} from 'features/userSlice'
+} from 'features/userSlice/thunks'
+
+import { setUserInfo } from 'features/userSlice'
 
 export const getPrograms = async (dispatch, sendFetch, token) => {
   const data = await sendFetch({
@@ -10,7 +12,7 @@ export const getPrograms = async (dispatch, sendFetch, token) => {
     token
   })
 
-  console.log(data)
+  dispatch(setUserInfo(data))
 }
 
 export const removeProgram = async (dispatch) => {

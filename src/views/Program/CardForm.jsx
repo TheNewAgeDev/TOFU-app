@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ActivityIndicator } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import useStatus from 'hooks/useStatus'
@@ -18,18 +18,24 @@ const CardForm = () => {
   const [selectedProgram, setSelectedProgram] = useState('default')
 
   const { selectProgram, getPrograms } = useUser()
-  const { statusMessage, setStatus } = useStatus()
+  const { status, statusMessage, setStatus } = useStatus()
   const { black, white } = theme.colors
 
   useEffect(() => {
-    getPrograms()
-  }, [getPrograms])
+    const fetchPrograms = async () => {
+      setStatus('loading')
+      await getPrograms()
+      setStatus('')
+    }
+
+    fetchPrograms()
+  }, [])
 
   const programs = useSelector(state => state.user.programs.map((item, index) => {
     return {
       id: item.id,
       label: item.name,
-      value: item.slug,
+      value: item.name,
       style: {
         backgroundColor: theme.colors.backgroundPrimary,
         color: isDark ? white : black
@@ -72,7 +78,9 @@ const CardForm = () => {
       </Card>
 
       <Text type='error' style={styles.alert}>
-        {statusMessage}
+        {
+          status === 'loading' ? <ActivityIndicator size='large' style={styles.loader} /> : statusMessage
+        }
       </Text>
 
       <Button
@@ -91,6 +99,9 @@ const getStyles = theme => StyleSheet.create({
     marginTop: hp('4%')
   },
   alert: {
+    marginTop: hp('4%')
+  },
+  loader: {
     marginTop: hp('4%')
   },
   input: {

@@ -20,7 +20,7 @@ const useUser = () => {
 
   const loginUser = (...args) => login(dispatch, sendFetch, ...args)
   const logoutUser = (...args) => logout(dispatch, sendFetch, user.token, ...args)
-  const getPrograms = (...args) => getUserProgram(dispatch, sendFetch, user.token, ...args)
+  const getPrograms = async (...args) => getUserProgram(dispatch, sendFetch, user.token, ...args)
   const selectProgram = (...args) => setProgram(dispatch, ...args)
   const removeProgram = (...args) => delProgram(dispatch, ...args)
 

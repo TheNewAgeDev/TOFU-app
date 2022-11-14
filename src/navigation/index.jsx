@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 
 import useTheme from 'hooks/useTheme'
-import { verify } from 'features/userSlice'
+import { verify } from 'features/userSlice/thunks'
 import { setTheme } from 'features/settingSlice'
 import { themeNavigation } from '#/theme'
 
