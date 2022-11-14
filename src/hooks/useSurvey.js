@@ -36,8 +36,11 @@ const useSurvey = (course) => {
         numRandom: randomNum(1, 5)
       })))
 
-      if (data.length > 0) setCount(1)
-      setStatus(prev => prev === 'endSurvey' ? 'endSurvey' : (data.length > 0 ? '' : 'notFound'))
+      const nextQuestion = course.answers.length + 1
+
+      if (nextQuestion > data.length) setStatus('endSurvey')
+      if (data.length > 0) setCount(nextQuestion)
+      setStatus(prev => prev === 'endSurvey' ? 'endSurvey' : '')
     }
 
     getQuestions()
