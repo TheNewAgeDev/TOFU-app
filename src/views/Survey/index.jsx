@@ -19,6 +19,10 @@ const Survey = ({ route }) => {
     navigation.setOptions({ title: course.name })
   }, [])
 
+  const handleGoToHome = () => {
+    navigation.navigate('ends')
+  }
+
   const handleSubmit = async () => {
     saveAnswer({ answer })
     setAnswer(null)
@@ -40,6 +44,7 @@ const Survey = ({ route }) => {
         answer={answer}
         setAnswer={setAnswer}
         question={question}
+        handleGoToHome={handleGoToHome}
         handlePrev={handlePrev}
         handleSubmit={handleSubmit}
         course={course}

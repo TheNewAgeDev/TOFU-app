@@ -1,4 +1,4 @@
-import { View, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Image, StyleSheet, ActivityIndicator } from 'react-native'
 
 import useTheme from 'hooks/useTheme'
 import { wp, hp, setOpacity } from 'utils'
@@ -13,7 +13,11 @@ import NumericalRange from 'components/KindOfQuestions/NumericalRange'
 import SlideBar from 'components/KindOfQuestions/SlideBar'
 import DragAndDrop from 'components/KindOfQuestions/DragAndDrop'
 
-const QuestionCard = ({ num, course, question, answer, setAnswer, numRandom, status, ...restOfProps }) => {
+import ImgToEnd from 'assets/smiles/emocionado.png'
+
+const QuestionCard = ({
+  num, course, question, answer, setAnswer, numRandom, handleGoToHome, status, ...restOfProps
+}) => {
   const { styles } = useTheme(getStyles)
 
   if (status === 'loading') {
@@ -21,6 +25,27 @@ const QuestionCard = ({ num, course, question, answer, setAnswer, numRandom, sta
       <Card style={[styles.content, { height: hp('88%') }]}>
         <ActivityIndicator size='large' />
       </Card>
+    )
+  }
+
+  if (status === 'endSurvey') {
+    return (
+      <View>
+        <StyledText style={styles.teacherName}>{course.teacher}</StyledText>
+
+        <Card style={styles.content}>
+          <StyledText style={styles.textEnd}>
+            Calificación finalizada con éxito
+          </StyledText>
+
+          <Image style={styles.ImageStyles} source={ImgToEnd} resizeMode='contain' />
+
+          <Button onPress={handleGoToHome} iconLeft='arrow-left'>
+            Ver cursos
+          </Button>
+        </Card>
+
+      </View>
     )
   }
 
@@ -119,6 +144,16 @@ const getStyles = theme => StyleSheet.create({
     marginTop: hp('1%'),
     textAlign: 'center',
     fontSize: hp('1.5%')
+  },
+  textEnd: {
+    fontSize: hp('3%'),
+    textAlign: 'center',
+    color: theme.colors.quaternary
+  },
+  ImageStyles: {
+    width: wp('35%'),
+    height: hp('20%'),
+    marginBottom: hp('5%')
   }
 })
 

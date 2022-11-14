@@ -27,7 +27,7 @@ export const coursesSlice = createSlice({
         return
       }
 
-      console.log(state.coursesList.find(course => course.id === groupId).answers)
+      answer.value = value
     }
   }
 })

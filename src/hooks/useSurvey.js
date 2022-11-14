@@ -20,7 +20,7 @@ const useSurvey = (course) => {
   const MAX_QUESTIONS = questions.length
 
   useEffect(() => {
-    setStatus('loading')
+    setStatus(prev => prev === 'endSurvey' ? 'endSurvey' : 'loading')
 
     const getQuestions = async () => {
       const data = await sendFetch({
@@ -37,14 +37,14 @@ const useSurvey = (course) => {
       })))
 
       if (data.length > 0) setCount(1)
-      setStatus(data.length > 0 ? '' : 'notFound')
+      setStatus(prev => prev === 'endSurvey' ? 'endSurvey' : (data.length > 0 ? '' : 'notFound'))
     }
 
     getQuestions()
   }, [])
 
   const saveAnswer = async ({ answer }) => {
-    setStatus('sendAnswer')
+    setStatus(prev => prev === 'endSurvey' ? 'endSurvey' : 'sendAnswer')
     sendFetch({
       route: '/answer',
       token,
@@ -54,7 +54,7 @@ const useSurvey = (course) => {
         value: parseInt(answer)
       }
     }).then(() => {
-      setStatus('')
+      setStatus(prev => prev === 'endSurvey' ? 'endSurvey' : '')
       dispatch(updateAnswer({
         groupId: course.id,
         questionId: question.id,
@@ -69,7 +69,11 @@ const useSurvey = (course) => {
   const controllerCount = {
     nextQuestion: () => {
       setCount(prev => {
-        if (prev >= MAX_QUESTIONS) return MAX_QUESTIONS
+        if (prev >= MAX_QUESTIONS) {
+          setStatus('endSurvey')
+          return MAX_QUESTIONS
+        }
+
         return prev + 1
       })
     },
