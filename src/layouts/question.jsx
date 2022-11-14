@@ -1,10 +1,6 @@
-import { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'
 
 import useTheme from 'hooks/useTheme'
-import { nextCount, prevCount } from 'features/surveySlice'
 import { wp, hp, setOpacity } from 'utils'
 
 import Card from 'components/Cards/Secondary'
@@ -17,22 +13,8 @@ import NumericalRange from 'components/KindOfQuestions/NumericalRange'
 import SlideBar from 'components/KindOfQuestions/SlideBar'
 import DragAndDrop from 'components/KindOfQuestions/DragAndDrop'
 
-const QuestionCard = ({ num, course, question, setAnswer }) => {
-  const navigation = useNavigation()
+const QuestionCard = ({ num, setNum, course, question, setAnswer, MAX_QUESTIONS }) => {
   const { styles } = useTheme(getStyles)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    navigation.setOptions({ title: course.name })
-  }, [])
-
-  const handlePrev = () => {
-    dispatch(prevCount())
-  }
-
-  const handleNext = () => {
-    dispatch(nextCount())
-  }
 
   return (
     <View>
@@ -40,7 +22,7 @@ const QuestionCard = ({ num, course, question, setAnswer }) => {
 
       <Card style={styles.content}>
         <StyledText style={styles.textQuestion}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum laudantium eos consectetur nam sint facilis dolores rem soluta exercitationem non.
+          {question}
         </StyledText>
 
         {
@@ -56,16 +38,16 @@ const QuestionCard = ({ num, course, question, setAnswer }) => {
 
       <View style={styles.menu}>
         <Button
-          onPress={handlePrev}
+          onPress={() => setNum.prevQuestion()}
           disabled={num === 1}
           iconLeft='arrow-left'
           style={num === 1 ? styles.disableButtonBefore : styles.buttonBefore}
         >
           Anterior
         </Button>
-        <StyledText style={styles.counter}>{num}/26</StyledText>
+        <StyledText style={styles.counter}>{num}/{MAX_QUESTIONS}</StyledText>
         <Button
-          onPress={handleNext}
+          onPress={() => setNum.nextQuestion()}
           iconRight='arrow-right'
         >
           Siguiente
