@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import { EvilIcons } from '@expo/vector-icons'
@@ -6,35 +7,47 @@ import StyledText from 'components/Styled/Text'
 import Unipaz from 'components/Icons/unipazLogo'
 
 import useTheme from 'hooks/useTheme'
+import useUser from 'hooks/useUser'
 import useModal from 'hooks/useModal'
 import { wp, hp } from 'utils'
 
 const DEFAULT_TITLE = 'Evaluación Docente'
 
+const GetTextHeader = ({ isCustomTitle, styles, name, children }) => {
+  if (isCustomTitle) return <StyledText style={styles.styleText}>{children}</StyledText>
+  if (name === '') return <StyledText style={styles.styleTextLoader}>Cargando...</StyledText>
+
+  return (
+    <>
+      <StyledText style={styles.styleText}>Bienvenido, </StyledText>
+      <StyledText style={styles.name}>{name}</StyledText>
+    </>
+  )
+}
+
 const HeaderTitle = ({ children }) => {
   const { styles } = useTheme(headerStyles)
   const name = useSelector(state => state.user.name)
   const { toggleModal } = useModal()
+  const { getPrograms } = useUser()
 
   const isCustomTitle = !children.endsWith(DEFAULT_TITLE)
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      if (name !== '') return
+      await getPrograms()
+    }
+
+    fetchPrograms()
+  }, [])
 
   return (
     <View style={styles.container}>
       <Unipaz theme={styles.logoTheme} width={wp('10%')} height={hp('8%')} />
 
       <View style={styles.contentName}>
-        {
-          isCustomTitle
-            ? (
-              <StyledText style={styles.styleText}>{children}</StyledText>
-              )
-            : (
-              <>
-                <StyledText style={styles.styleText}>Bienvenido, </StyledText>
-                <StyledText style={styles.name}>{name}</StyledText>
-              </>
-              )
-        }
+        <GetTextHeader name={name} isCustomTitle={isCustomTitle} styles={styles}>{children}</GetTextHeader>
       </View>
 
       <TouchableOpacity onPress={() => { toggleModal() }}>
@@ -72,6 +85,9 @@ const headerStyles = (theme, isDark) => {
     },
     styleText: {
       fontSize: hp('2.2%')
+    },
+    styleTextLoader: {
+      color: '#ababab'
     }
   })
 }

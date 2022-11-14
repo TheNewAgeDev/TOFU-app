@@ -21,16 +21,6 @@ const CardForm = () => {
   const { status, statusMessage, setStatus } = useStatus()
   const { black, white } = theme.colors
 
-  useEffect(() => {
-    const fetchPrograms = async () => {
-      setStatus('loading')
-      await getPrograms()
-      setStatus('')
-    }
-
-    fetchPrograms()
-  }, [])
-
   const programs = useSelector(state => state.user.programs.map((item, index) => {
     return {
       id: item.id,
@@ -42,6 +32,18 @@ const CardForm = () => {
       }
     }
   }))
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      if (programs.length > 0) return
+
+      setStatus('loading')
+      await getPrograms()
+      setStatus('')
+    }
+
+    fetchPrograms()
+  }, [])
 
   const handleChange = (itemValue) => setSelectedProgram(itemValue)
 
