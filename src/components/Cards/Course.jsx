@@ -22,7 +22,7 @@ const Course = ({ course, style }) => {
   return (
     <TouchableOpacity onPress={handlePress} style={[styles.container, style]}>
       <Image resizeMode='cover' source={{ uri: course.image }} style={styles.image} />
-      <StyledText style={styles.title}>{course.name}</StyledText>
+      <StyledText numberOfLines={1} style={styles.title}>{course.name}</StyledText>
     </TouchableOpacity>
   )
 }
@@ -46,6 +46,7 @@ const getStyles = (theme, isDark) => {
     },
     title: {
       color: isDark ? white : black,
+      paddingHorizontal: wp('2%'),
       marginTop: hp('1%'),
       textAlign: 'center'
     }

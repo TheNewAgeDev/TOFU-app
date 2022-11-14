@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import { EvilIcons } from '@expo/vector-icons'
 
@@ -12,14 +12,16 @@ import { wp, hp } from 'utils'
 const DEFAULT_TITLE = 'Evaluación Docente'
 
 const GetTextHeader = ({ isCustomTitle, styles, name, children }) => {
-  if (isCustomTitle) return <StyledText style={styles.styleText}>{children}</StyledText>
-  if (name === '') return <StyledText style={styles.styleTextLoader}>Cargando...</StyledText>
+  if (isCustomTitle) return <StyledText numberOfLines={1} style={styles.styleText}>{children}</StyledText>
+  if (name === '') return <StyledText numberOfLines={1} style={styles.styleTextLoader}>Cargando...</StyledText>
 
   return (
-    <>
-      <StyledText style={styles.styleText}>Bienvenido, </StyledText>
-      <StyledText style={styles.name}>{name}</StyledText>
-    </>
+    <StyledText
+      numberOfLines={1}
+      style={styles.styleText}
+    >
+      Bienvenido/a, <Text style={styles.name}>{name}</Text>
+    </StyledText>
   )
 }
 
@@ -65,17 +67,24 @@ const headerStyles = (theme, isDark) => {
       color: isDark ? white : black
     },
     contentName: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      textAlign: 'center',
+
+      overflow: 'hidden',
+      width: wp('60%')
     },
     name: {
-      color: theme.colors.primary,
-      fontSize: hp('2.2%')
+      color: theme.colors.primary
     },
     styleText: {
-      fontSize: hp('2.2%')
+      fontSize: hp('2.2%'),
+      textAlign: 'center'
     },
     styleTextLoader: {
-      color: '#ababab'
+      color: '#ababab',
+      textAlign: 'center'
     }
   })
 }
