@@ -13,6 +13,7 @@ const SlideBar = ({ setAnswer }) => {
 
   const handleSlide = (e) => {
     const value = Math.round(e)
+    if (value === 0) return
 
     setAnswer(value)
     setKeyPress(value)

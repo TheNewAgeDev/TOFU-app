@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
+import useStatus from 'hooks/useStatus'
 import useFetch from 'hooks/useFetch'
 
 const useSurvey = () => {
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
   const [questions, setQuestions] = useState([])
 
+  const { status, setStatus } = useStatus()
   const { sendFetch } = useFetch()
   const token = useSelector(state => state.user.token)
 
   useEffect(() => {
+    setStatus('loading')
+
     const getQuestions = async () => {
       const data = await sendFetch({
         route: '/survey',
@@ -19,6 +23,9 @@ const useSurvey = () => {
       })
 
       setQuestions(data)
+
+      if (data.length > 0) setCount(1)
+      setStatus(data.length > 0 ? '' : 'notFound')
     }
 
     getQuestions()
@@ -34,7 +41,7 @@ const useSurvey = () => {
     },
     prevQuestion: () => {
       setCount(prev => {
-        if (prev <= 0) return 0
+        if (prev <= 1) return 1
         return prev - 1
       })
     }
@@ -42,6 +49,7 @@ const useSurvey = () => {
 
   return {
     count,
+    status,
     MAX_QUESTIONS,
     controllerCount
   }

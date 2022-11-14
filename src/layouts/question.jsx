@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ActivityIndicator } from 'react-native'
 
 import useTheme from 'hooks/useTheme'
 import { wp, hp, setOpacity } from 'utils'
@@ -13,8 +13,16 @@ import NumericalRange from 'components/KindOfQuestions/NumericalRange'
 import SlideBar from 'components/KindOfQuestions/SlideBar'
 import DragAndDrop from 'components/KindOfQuestions/DragAndDrop'
 
-const QuestionCard = ({ num, setNum, course, question, setAnswer, MAX_QUESTIONS }) => {
+const QuestionCard = ({ num, course, question, setAnswer, numRandom, status, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
+
+  if (status === 'loading') {
+    return (
+      <Card style={[styles.content, { height: hp('88%') }]}>
+        <ActivityIndicator size='large' />
+      </Card>
+    )
+  }
 
   return (
     <View>
@@ -25,17 +33,29 @@ const QuestionCard = ({ num, setNum, course, question, setAnswer, MAX_QUESTIONS 
           {question}
         </StyledText>
 
-        {
-          num === 1
-            ? <SmileyFaces setAnswer={setAnswer} />
-            : num === 2
-              ? <LittleStars setAnswer={setAnswer} />
-              : num === 3
-                ? <NumericalRange setAnswer={setAnswer} />
-                : num === 4 ? <SlideBar setAnswer={setAnswer} /> : <DragAndDrop setAnswer={setAnswer} />
-        }
+        <GetTypeQuestion numRandom={numRandom} setAnswer={setAnswer} />
       </Card>
 
+      <ControlSurvey num={num} {...restOfProps} />
+    </View>
+  )
+}
+
+const GetTypeQuestion = ({ numRandom, setAnswer }) => {
+  if (numRandom === 1) return <SmileyFaces setAnswer={setAnswer} />
+  if (numRandom === 2) return <LittleStars setAnswer={setAnswer} />
+  if (numRandom === 3) return <NumericalRange setAnswer={setAnswer} />
+  if (numRandom === 4) return <SlideBar setAnswer={setAnswer} />
+  if (numRandom === 5) return <DragAndDrop setAnswer={setAnswer} />
+
+  return null
+}
+
+const ControlSurvey = ({ num, answer, handleSubmit, setNum, MAX_QUESTIONS }) => {
+  const { styles } = useTheme(getStyles)
+
+  return (
+    <>
       <View style={styles.menu}>
         <Button
           onPress={() => setNum.prevQuestion()}
@@ -47,14 +67,15 @@ const QuestionCard = ({ num, setNum, course, question, setAnswer, MAX_QUESTIONS 
         </Button>
         <StyledText style={styles.counter}>{num}/{MAX_QUESTIONS}</StyledText>
         <Button
-          onPress={() => setNum.nextQuestion()}
+          disabled={!answer}
+          onPress={handleSubmit}
           iconRight='arrow-right'
         >
           Siguiente
         </Button>
       </View>
       <StyledText style={styles.progress}>PROGRESO GUARDADO</StyledText>
-    </View>
+    </>
   )
 }
 

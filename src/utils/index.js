@@ -14,3 +14,7 @@ export const setOpacity = (color, opacity) => {
   const opacityRes = hexValue.padStart(2, '0').toUpperCase()
   return `${color}${opacityRes}`
 }
+
+export const randomNum = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
