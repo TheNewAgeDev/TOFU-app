@@ -8,10 +8,10 @@ import QuestionCard from 'layouts/question'
 
 const Survey = ({ route }) => {
   const navigation = useNavigation()
+  const { course } = route.params
 
   const [answer, setAnswer] = useState(null)
-  const { questions, count, controllerCount, status, MAX_QUESTIONS } = useSurvey()
-  const { course } = route.params
+  const { question, saveAnswer, count, controllerCount, status, MAX_QUESTIONS } = useSurvey(course)
 
   const { Modal } = useModal()
 
@@ -20,11 +20,15 @@ const Survey = ({ route }) => {
   }, [])
 
   const handleSubmit = async () => {
+    saveAnswer({ answer })
     setAnswer('')
     controllerCount.nextQuestion()
   }
 
-  const questionNow = questions.find(q => q.num === count)
+  const handlePrev = async () => {
+    setAnswer('')
+    controllerCount.prevQuestion()
+  }
 
   return (
     <>
@@ -33,14 +37,14 @@ const Survey = ({ route }) => {
       <QuestionCard
         MAX_QUESTIONS={MAX_QUESTIONS}
         num={count}
-        setNum={controllerCount}
         answer={answer}
         setAnswer={setAnswer}
-        question={questionNow}
+        question={question}
+        handlePrev={handlePrev}
         handleSubmit={handleSubmit}
         course={course}
         status={status}
-        numRandom={questionNow ? questionNow.numRandom : 0}
+        numRandom={question ? question.numRandom : 0}
       />
     </>
   )

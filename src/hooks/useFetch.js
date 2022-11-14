@@ -15,7 +15,14 @@ const sendFetch = async ({ token, route = '/', method = 'POST', bodyJson = {} })
   if (method !== 'GET') configFetch.body = JSON.stringify(bodyJson)
 
   const res = await fetch(`${API_URL}${route}`, configFetch)
-  return await res.json()
+
+  try {
+    return await res.json()
+  } catch (error) {
+    return {
+      message: 'response is not a object'
+    }
+  }
 }
 
 const useFetch = () => {

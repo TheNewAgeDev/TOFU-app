@@ -36,7 +36,7 @@ const QuestionCard = ({ num, course, question, setAnswer, numRandom, status, ...
         <GetTypeQuestion numRandom={numRandom} setAnswer={setAnswer} />
       </Card>
 
-      <ControlSurvey num={num} {...restOfProps} />
+      <ControlSurvey status={status} num={num} {...restOfProps} />
     </View>
   )
 }
@@ -51,14 +51,14 @@ const GetTypeQuestion = ({ numRandom, setAnswer }) => {
   return null
 }
 
-const ControlSurvey = ({ num, answer, handleSubmit, setNum, MAX_QUESTIONS }) => {
+const ControlSurvey = ({ num, answer, handleSubmit, handlePrev, status, MAX_QUESTIONS }) => {
   const { styles } = useTheme(getStyles)
 
   return (
     <>
       <View style={styles.menu}>
         <Button
-          onPress={() => setNum.prevQuestion()}
+          onPress={handlePrev}
           disabled={num === 1}
           iconLeft='arrow-left'
           style={num === 1 ? styles.disableButtonBefore : styles.buttonBefore}
@@ -71,10 +71,12 @@ const ControlSurvey = ({ num, answer, handleSubmit, setNum, MAX_QUESTIONS }) => 
           onPress={handleSubmit}
           iconRight='arrow-right'
         >
-          Siguiente
+          {num === MAX_QUESTIONS ? 'Finalizar' : 'Siguiente'}
         </Button>
       </View>
-      <StyledText style={styles.progress}>PROGRESO GUARDADO</StyledText>
+      <StyledText style={styles.progress}>
+        {status === 'sendAnswer' ? <ActivityIndicator size='small' /> : 'PROGRESO GUARDADO'}
+      </StyledText>
     </>
   )
 }

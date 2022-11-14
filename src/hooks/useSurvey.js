@@ -6,13 +6,15 @@ import useFetch from 'hooks/useFetch'
 
 import { randomNum } from 'utils'
 
-const useSurvey = () => {
+const useSurvey = (course) => {
   const [count, setCount] = useState(0)
   const [questions, setQuestions] = useState([])
 
   const { status, setStatus } = useStatus()
   const { sendFetch } = useFetch()
+
   const token = useSelector(state => state.user.token)
+  const question = questions.find(q => q.num === count)
 
   useEffect(() => {
     setStatus('loading')
@@ -38,6 +40,23 @@ const useSurvey = () => {
     getQuestions()
   }, [])
 
+  const saveAnswer = async ({ answer }) => {
+    setStatus('sendAnswer')
+    sendFetch({
+      route: '/answer',
+      token,
+      bodyJson: {
+        group_id: course.id,
+        question_id: question ? question.id : 0,
+        value: parseInt(answer)
+      }
+    }).then(() => {
+      setStatus('')
+    })
+
+    return answer
+  }
+
   const MAX_QUESTIONS = questions.length
   const controllerCount = {
     nextQuestion: () => {
@@ -55,11 +74,12 @@ const useSurvey = () => {
   }
 
   return {
-    questions,
+    question,
     count,
-    status,
     MAX_QUESTIONS,
-    controllerCount
+    controllerCount,
+    saveAnswer,
+    status
   }
 }
 
