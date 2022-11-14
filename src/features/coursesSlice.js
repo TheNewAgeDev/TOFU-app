@@ -10,10 +10,28 @@ export const coursesSlice = createSlice({
   reducers: {
     setCourses: (state, action) => {
       state.coursesList = action.payload
+    },
+    updateAnswer: (state, action) => {
+      const { groupId, questionId, value, maxQuestions } = action.payload
+
+      const course = state.coursesList.find(course => course.id === groupId)
+      const answer = course.answers.find(answer => answer.num === questionId)
+
+      if (!answer) {
+        course.answers.push({
+          num: questionId,
+          value
+        })
+
+        course.state = maxQuestions === course.answers.length ? 'end' : 'continue'
+        return
+      }
+
+      console.log(state.coursesList.find(course => course.id === groupId).answers)
     }
   }
 })
 
-export const { setCourses } = coursesSlice.actions
+export const { setCourses, updateAnswer } = coursesSlice.actions
 
 export default coursesSlice.reducer

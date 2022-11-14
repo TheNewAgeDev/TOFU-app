@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { updateAnswer } from 'features/coursesSlice'
 import useStatus from 'hooks/useStatus'
 import useFetch from 'hooks/useFetch'
 
@@ -9,12 +10,14 @@ import { randomNum } from 'utils'
 const useSurvey = (course) => {
   const [count, setCount] = useState(0)
   const [questions, setQuestions] = useState([])
+  const dispatch = useDispatch()
 
   const { status, setStatus } = useStatus()
   const { sendFetch } = useFetch()
 
   const token = useSelector(state => state.user.token)
   const question = questions.find(q => q.num === count)
+  const MAX_QUESTIONS = questions.length
 
   useEffect(() => {
     setStatus('loading')
@@ -52,12 +55,17 @@ const useSurvey = (course) => {
       }
     }).then(() => {
       setStatus('')
+      dispatch(updateAnswer({
+        groupId: course.id,
+        questionId: question.id,
+        value: parseInt(answer),
+        maxQuestions: MAX_QUESTIONS
+      }))
     })
 
     return answer
   }
 
-  const MAX_QUESTIONS = questions.length
   const controllerCount = {
     nextQuestion: () => {
       setCount(prev => {
