@@ -22,7 +22,7 @@ const DragAndDrop = ({ setAnswer }) => {
       <DraggableItems pan={pan} styles={styles} keyPress={keyPress} handlePress={handlePress} />
 
       <Animated.View ref={pan} style={styles.response}>
-        <Text style={styles.textResponse}>Arrastra aquí una opción {keyPress}</Text>
+        <Text style={styles.textResponse}>{keyPress ? '' : 'Arrastra aquí una opción'}</Text>
       </Animated.View>
     </View>
   )

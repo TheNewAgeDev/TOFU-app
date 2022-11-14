@@ -47,7 +47,9 @@ const CardForm = () => {
 
   const handleProgram = () => {
     setStatus('')
-    selectProgram(selectedProgram, setStatus)
+
+    const selProg = programs.find(prog => prog.value === selectedProgram)
+    selectProgram(selProg, setStatus)
   }
 
   const DEFAULT = {

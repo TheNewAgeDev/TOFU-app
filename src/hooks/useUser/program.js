@@ -26,6 +26,6 @@ export const removeProgram = async (dispatch) => {
 }
 
 export const selectProgram = async (dispatch, program, setStatus) => {
-  if (program === 'default') return setStatus('noSelect', 'Por favor, elija su programa')
+  if (!program || program.value === 'default') return setStatus('noSelect', 'Por favor, elija su programa')
   dispatch(selectProgramReducer(program))
 }

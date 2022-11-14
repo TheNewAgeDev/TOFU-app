@@ -48,7 +48,7 @@ export const selectProgram = createAsyncThunk(
   async (program) => {
     const { setStorage } = useStorage()
 
-    await setStorage('@selectProgram', program)
+    await setStorage('@selectProgram', JSON.stringify(program))
 
     return {
       program
