@@ -21,12 +21,12 @@ const Survey = ({ route }) => {
 
   const handleSubmit = async () => {
     saveAnswer({ answer })
-    setAnswer('')
+    setAnswer(null)
     controllerCount.nextQuestion()
   }
 
   const handlePrev = async () => {
-    setAnswer('')
+    setAnswer(null)
     controllerCount.prevQuestion()
   }
 

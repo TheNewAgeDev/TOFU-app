@@ -13,7 +13,7 @@ import NumericalRange from 'components/KindOfQuestions/NumericalRange'
 import SlideBar from 'components/KindOfQuestions/SlideBar'
 import DragAndDrop from 'components/KindOfQuestions/DragAndDrop'
 
-const QuestionCard = ({ num, course, question, setAnswer, numRandom, status, ...restOfProps }) => {
+const QuestionCard = ({ num, course, question, answer, setAnswer, numRandom, status, ...restOfProps }) => {
   const { styles } = useTheme(getStyles)
 
   if (status === 'loading') {
@@ -33,20 +33,20 @@ const QuestionCard = ({ num, course, question, setAnswer, numRandom, status, ...
           {question && question.body}
         </StyledText>
 
-        <GetTypeQuestion numRandom={numRandom} setAnswer={setAnswer} />
+        <GetTypeQuestion numRandom={numRandom} answer={answer} setAnswer={setAnswer} />
       </Card>
 
-      <ControlSurvey status={status} num={num} {...restOfProps} />
+      <ControlSurvey status={status} num={num} answer={answer} {...restOfProps} />
     </View>
   )
 }
 
-const GetTypeQuestion = ({ numRandom, setAnswer }) => {
-  if (numRandom === 1) return <SmileyFaces setAnswer={setAnswer} />
-  if (numRandom === 2) return <LittleStars setAnswer={setAnswer} />
-  if (numRandom === 3) return <NumericalRange setAnswer={setAnswer} />
-  if (numRandom === 4) return <SlideBar setAnswer={setAnswer} />
-  if (numRandom === 5) return <DragAndDrop setAnswer={setAnswer} />
+const GetTypeQuestion = ({ numRandom, answer, setAnswer }) => {
+  if (numRandom === 1) return <SmileyFaces answer={answer} setAnswer={setAnswer} />
+  if (numRandom === 2) return <LittleStars answer={answer} setAnswer={setAnswer} />
+  if (numRandom === 3) return <NumericalRange answer={answer} setAnswer={setAnswer} />
+  if (numRandom === 4) return <SlideBar answer={answer} setAnswer={setAnswer} />
+  if (numRandom === 5) return <DragAndDrop answer={answer} setAnswer={setAnswer} />
 
   return null
 }

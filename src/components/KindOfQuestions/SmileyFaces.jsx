@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, TouchableOpacity, Image, FlatList, StyleSheet } from 'react-native'
 
 import Text from 'components/Styled/Text'
@@ -65,9 +65,13 @@ const SMILES = [
   }
 ]
 
-const LittleStars = ({ setAnswer }) => {
+const LittleStars = ({ answer, setAnswer }) => {
   const { styles } = useTheme(getStyles)
   const [keyPress, setKeyPress] = useState(null)
+
+  useEffect(() => {
+    if (answer === null) setKeyPress(null)
+  }, [answer])
 
   const handlePress = (value) => {
     setAnswer(value)

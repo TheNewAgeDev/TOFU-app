@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import Slider from '@react-native-community/slider'
 
@@ -7,9 +7,13 @@ import Text from 'components/Styled/Text'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const SlideBar = ({ setAnswer }) => {
+const SlideBar = ({ answer, setAnswer }) => {
   const { styles, theme } = useTheme(getStyles)
   const [keyPress, setKeyPress] = useState(null)
+
+  useEffect(() => {
+    if (answer === null) setKeyPress(null)
+  }, [answer])
 
   const handleSlide = (e) => {
     const value = Math.round(e)
@@ -23,6 +27,7 @@ const SlideBar = ({ setAnswer }) => {
     <View style={styles.container}>
       <Slider
         style={styles.slideBar}
+        value={keyPress}
         onValueChange={handleSlide}
         minimumValue={1}
         maximumValue={4}

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { StyleSheet, View, Animated } from 'react-native'
 
 import Text from 'components/Styled/Text'
@@ -7,10 +7,14 @@ import DraggableItems from './DraggableItems'
 import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
-const DragAndDrop = ({ setAnswer }) => {
+const DragAndDrop = ({ answer, setAnswer }) => {
   const { styles } = useTheme(getStyles)
   const [keyPress, setKeyPress] = useState(null)
   const pan = useRef()
+
+  useEffect(() => {
+    if (answer === null) setKeyPress(null)
+  }, [answer])
 
   const handlePress = (value) => {
     setAnswer(value)
