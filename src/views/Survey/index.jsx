@@ -5,30 +5,26 @@ import useSurvey from 'hooks/useSurvey'
 import useModal from 'hooks/useModal'
 
 import QuestionCard from 'layouts/question'
-import { randomNum } from 'utils'
 
 const Survey = ({ route }) => {
   const navigation = useNavigation()
 
   const [answer, setAnswer] = useState(null)
-  const [numRandom, setNumRandom] = useState(null)
-  const { count, controllerCount, status, MAX_QUESTIONS } = useSurvey()
+  const { questions, count, controllerCount, status, MAX_QUESTIONS } = useSurvey()
   const { course } = route.params
 
   const { Modal } = useModal()
 
   useEffect(() => {
     navigation.setOptions({ title: course.name })
-    setNumRandom(randomNum(1, 5))
   }, [])
 
   const handleSubmit = async () => {
-    setNumRandom(null)
-
     setAnswer('')
     controllerCount.nextQuestion()
-    setNumRandom(randomNum(1, 5))
   }
+
+  const questionNow = questions.find(q => q.num === count)
 
   return (
     <>
@@ -40,11 +36,11 @@ const Survey = ({ route }) => {
         setNum={controllerCount}
         answer={answer}
         setAnswer={setAnswer}
-        question={answer}
+        question={questionNow}
         handleSubmit={handleSubmit}
         course={course}
         status={status}
-        numRandom={numRandom}
+        numRandom={questionNow ? questionNow.numRandom : 0}
       />
     </>
   )

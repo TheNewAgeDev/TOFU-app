@@ -30,7 +30,7 @@ const QuestionCard = ({ num, course, question, setAnswer, numRandom, status, ...
 
       <Card style={styles.content}>
         <StyledText style={styles.textQuestion}>
-          {question}
+          {question && question.body}
         </StyledText>
 
         <GetTypeQuestion numRandom={numRandom} setAnswer={setAnswer} />
@@ -88,9 +88,10 @@ const getStyles = theme => StyleSheet.create({
     marginTop: hp('1.5%')
   },
   textQuestion: {
-    fontSize: hp('2.5%'),
+    fontSize: hp('3%'),
+    fontWeight: '400',
     textAlign: 'center',
-    marginBottom: hp('3%')
+    marginBottom: hp('4%')
   },
   content: {
     height: hp('74%'),

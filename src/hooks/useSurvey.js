@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux'
 import useStatus from 'hooks/useStatus'
 import useFetch from 'hooks/useFetch'
 
+import { randomNum } from 'utils'
+
 const useSurvey = () => {
   const [count, setCount] = useState(0)
   const [questions, setQuestions] = useState([])
@@ -22,7 +24,12 @@ const useSurvey = () => {
         token
       })
 
-      setQuestions(data)
+      setQuestions(data.map((question, i) => ({
+        id: question.id,
+        body: question.body,
+        num: i + 1,
+        numRandom: randomNum(1, 5)
+      })))
 
       if (data.length > 0) setCount(1)
       setStatus(data.length > 0 ? '' : 'notFound')
@@ -48,6 +55,7 @@ const useSurvey = () => {
   }
 
   return {
+    questions,
     count,
     status,
     MAX_QUESTIONS,
