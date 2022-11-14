@@ -2,11 +2,14 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { setCourses } from 'features/coursesSlice'
+
+import useStatus from 'hooks/useStatus'
 import useFetch from 'hooks/useFetch'
 
 const useCourses = (stateCorses) => {
   const { sendFetch } = useFetch()
   const dispatch = useDispatch()
+  const { status, setStatus } = useStatus()
 
   const user = useSelector(state => state.user)
   const courses = useSelector(state => state.courses.coursesList.map(course => {
@@ -25,6 +28,7 @@ const useCourses = (stateCorses) => {
   }, [])
 
   const getCourses = async () => {
+    setStatus('loading')
     const data = await sendFetch({
       route: '/group',
       method: 'GET',
@@ -32,10 +36,12 @@ const useCourses = (stateCorses) => {
     })
 
     dispatch(setCourses(data))
+    setStatus('')
   }
 
   return {
-    courses
+    courses,
+    isLoading: status === 'loading'
   }
 }
 
