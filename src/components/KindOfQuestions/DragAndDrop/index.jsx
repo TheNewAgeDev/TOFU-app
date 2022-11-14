@@ -13,7 +13,7 @@ const DragAndDrop = ({ answer, setAnswer }) => {
   const pan = useRef()
 
   useEffect(() => {
-    if (answer === null) setKeyPress(null)
+    if (answer !== keyPress) setKeyPress(answer)
   }, [answer])
 
   const handlePress = (value) => {

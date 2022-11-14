@@ -70,7 +70,7 @@ const LittleStars = ({ answer, setAnswer }) => {
   const [keyPress, setKeyPress] = useState(null)
 
   useEffect(() => {
-    if (answer === null) setKeyPress(null)
+    if (answer !== keyPress) setKeyPress(answer)
   }, [answer])
 
   const handlePress = (value) => {
