@@ -29,11 +29,15 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(verify.fulfilled, (state, action) => {
-      const { isValidate, saveToken, selectProgram } = action.payload
+      const { isValidate, saveToken, selectProgram, user } = action.payload
 
       state.isAuth = isValidate
       state.token = isValidate ? saveToken : {}
       state.selectProgram = selectProgram
+      if (user) {
+        state.name = user.name
+        state.programs = user.programs
+      }
     })
 
     builder.addCase(login.fulfilled, (state, action) => {

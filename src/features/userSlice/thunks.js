@@ -1,20 +1,37 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+
+import useFetch from 'hooks/useFetch'
 import useStorage from 'hooks/useStorage'
 
 export const verify = createAsyncThunk(
   'user/verify',
   async () => {
     const { getStorage } = useStorage()
+    const { sendFetch } = useFetch()
+
     const saveToken = JSON.parse(await getStorage('@accessToken'))
     let selectProgram = await getStorage('@selectProgram')
 
-    const isValidate = !!(saveToken && saveToken.access_token && saveToken.token_type)
+    let isValidate = false
+    let data = null
+
+    if (saveToken) {
+      data = await sendFetch({
+        route: '/me',
+        method: 'GET',
+        token: saveToken
+      })
+
+      isValidate = !data.message
+    }
+
     if (!isValidate) selectProgram = null
 
     return {
       isValidate,
       saveToken,
-      selectProgram
+      selectProgram,
+      user: data.message ? null : data
     }
   }
 )
