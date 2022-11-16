@@ -3,6 +3,8 @@ import { View, Image, PanResponder, Animated } from 'react-native'
 
 import Text from 'components/Styled/Text'
 
+import { wp, hp } from 'utils'
+
 const isInDropZone = ({ pageX, pageY, styles, moveX, moveY }) => {
   const initialPoint = [pageX, pageY]
   const lastPoint = [
@@ -20,17 +22,15 @@ const Draggable = ({
   contentPan, image, text, value, style, styles, keyPress, handlePress
 }) => {
   const [stateDrag] = useState({
-    opacity: new Animated.Value(0.9),
-    itemPan: useRef()
+    opacity: new Animated.Value(0.9)
   })
 
   useEffect(() => {
     if (keyPress === value) {
-      contentPan.current.measure((_x, _y, _width, _height, pageX, pageY) => {
-        stateDrag.itemPan.current.measure((_x, _y, _width, _height, pageXPan, pageYPam) => {
-          const movX = pageX - pageXPan
-          const movY = pageY - pageYPam
-
+      itemPan.current.measure((_x, _y, _width, _height, pageXPam, pageYPam) => {
+        contentPan.current.measure((_x, _y, _width, _height, pageX, pageY) => {
+          const movX = (pageX + wp('1.5%')) - pageXPam
+          const movY = (pageY + hp('1.15%')) - pageYPam
           Animated.spring(
             pan,
             {
@@ -54,6 +54,8 @@ const Draggable = ({
   }, [keyPress])
 
   const pan = useRef(new Animated.ValueXY()).current
+  const itemPan = useRef()
+
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
@@ -78,7 +80,15 @@ const Draggable = ({
           const isDropZone = isInDropZone({ moveX, moveY, styles, pageX, pageY })
 
           if (isDropZone) return handlePress(value)
+
           handlePress(null)
+          Animated.spring(
+            pan,
+            {
+              toValue: { x: 0, y: 0 },
+              useNativeDriver: false
+            }
+          ).start()
         })
       }
     })
@@ -90,7 +100,7 @@ const Draggable = ({
   }
 
   return (
-    <View ref={stateDrag.itemPan} style={styles.itemDrag}>
+    <View ref={itemPan} style={styles.itemDrag}>
       <Animated.View
         {...panResponder.panHandlers}
         style={[panStyle, styles.containerDrag, { opacity: stateDrag.opacity }]}

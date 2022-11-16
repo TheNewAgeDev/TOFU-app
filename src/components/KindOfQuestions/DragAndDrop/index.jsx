@@ -54,7 +54,9 @@ const getStyles = theme => StyleSheet.create({
     color: '#00000050'
   },
   itemDrag: {
-    width: wp('18%'),
+    width: wp('22%'),
+    height: hp('10%'),
+    margin: hp('1%'),
     zIndex: 9999,
     alignItems: 'center'
   },

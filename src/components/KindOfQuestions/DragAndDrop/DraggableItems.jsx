@@ -1,7 +1,6 @@
 import { View } from 'react-native'
 
 import Draggable from './Draggable'
-import { hp } from 'utils'
 
 import emocionado from 'assets/smiles/emocionado.png'
 import bien from 'assets/smiles/bien.png'
@@ -12,7 +11,6 @@ const DraggableItems = ({ pan, styles, keyPress, handlePress }) => {
   return (
     <View style={styles.row}>
       <Draggable
-        style={{ marginRight: hp('5%') }}
         styles={styles}
         keyPress={keyPress}
         handlePress={handlePress}
@@ -32,7 +30,6 @@ const DraggableItems = ({ pan, styles, keyPress, handlePress }) => {
           text='Muchas Veces'
         />
         <Draggable
-          style={{ marginTop: hp('0.4%') }}
           contentPan={pan}
           keyPress={keyPress}
           handlePress={handlePress}
@@ -43,7 +40,6 @@ const DraggableItems = ({ pan, styles, keyPress, handlePress }) => {
         />
       </View>
       <Draggable
-        style={{ marginLeft: hp('5%') }}
         contentPan={pan}
         styles={styles}
         keyPress={keyPress}
