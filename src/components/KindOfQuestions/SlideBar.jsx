@@ -8,7 +8,7 @@ import useTheme from 'hooks/useTheme'
 import { wp, hp } from 'utils'
 
 const SlideBar = ({ answer, setAnswer }) => {
-  const { styles, theme } = useTheme(getStyles)
+  const { styles, theme, isDark } = useTheme(getStyles)
   const [keyPress, setKeyPress] = useState(null)
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const SlideBar = ({ answer, setAnswer }) => {
         minimumValue={1}
         maximumValue={4}
         minimumTrackTintColor={theme.colors.primary}
-        maximumTrackTintColor={theme.colors.black}
+        maximumTrackTintColor={isDark ? theme.colors.white : theme.colors.black}
       />
 
       <Text style={styles.textDescription}>

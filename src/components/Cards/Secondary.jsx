@@ -18,7 +18,7 @@ const CardMain = ({ children, style, ...restOfProps }) => {
   )
 }
 
-const getStyles = theme => StyleSheet.create({
+const getStyles = (theme, isDark) => StyleSheet.create({
   container: {
     flexDirection: 'column',
     justifyContent: 'center',
@@ -26,10 +26,11 @@ const getStyles = theme => StyleSheet.create({
 
     borderRadius: wp('2%'),
     padding: hp('4%'),
-    shadowColor: '#D0CBCB',
+    shadowColor: isDark ? '#FFFFFF' : '#D0CBCB',
+    backgroundColor: isDark ? '#222121' : theme.colors.backgroudPrimary,
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 4
+    elevation: isDark ? 2 : 4
   }
 })
 

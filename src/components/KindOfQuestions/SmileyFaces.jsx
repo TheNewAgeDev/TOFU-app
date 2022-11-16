@@ -9,7 +9,7 @@ import feliz from 'assets/smiles/feliz.png'
 import sincomentarios from 'assets/smiles/sincomentarios.png'
 
 import useTheme from 'hooks/useTheme'
-import { wp, hp } from 'utils'
+import { wp, hp, setOpacity } from 'utils'
 
 const ImageComponent = ({ keyPress, onPress, image, label = '', value }) => {
   const { styles } = useTheme(getStyles)
@@ -98,49 +98,51 @@ const LittleStars = ({ answer, setAnswer }) => {
   )
 }
 
-const getStyles = theme => StyleSheet.create({
-  container: {
-    position: 'relative',
-    height: hp('41%'),
-    width: wp('75%')
-  },
-  imagePress: {
-    position: 'absolute',
-    width: wp('29%'),
-    height: hp('15%'),
-    top: hp('-1.5%')
-  },
-  buttonPress: {
-    backgroundColor: '#EBEDF0'
-  },
-  textPress: {
-    position: 'absolute',
-    top: hp('13%'),
-    color: '#000000'
-  },
-  imageStyle: {
-    width: wp('28%'),
-    height: hp('12%')
-  },
-  buttonSmile: {
-    width: wp('35%'),
-    padding: wp('3%'),
-    marginVertical: hp('1%'),
+const getStyles = (theme, isDark) => {
+  return StyleSheet.create({
+    container: {
+      position: 'relative',
+      height: hp('41%'),
+      width: wp('75%')
+    },
+    imagePress: {
+      position: 'absolute',
+      width: wp('29%'),
+      height: hp('15%'),
+      top: hp('-1.5%')
+    },
+    buttonPress: {
+      backgroundColor: isDark ? setOpacity(theme.colors.primary, 30) : '#EBEDF0'
+    },
+    textPress: {
+      position: 'absolute',
+      top: hp('13%'),
+      color: isDark ? '#FFFFFF' : '#000000'
+    },
+    imageStyle: {
+      width: wp('28%'),
+      height: hp('12%')
+    },
+    buttonSmile: {
+      width: wp('35%'),
+      padding: wp('3%'),
+      marginVertical: hp('1%'),
 
-    justifyContent: 'center',
-    alignItems: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
 
-    borderRadius: wp('2%'),
-    shadowColor: '#E5DEDE',
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-    elevation: 1.4
-  },
-  textSmile: {
-    marginTop: hp('0.5%'),
-    fontSize: hp('2%'),
-    fontWeight: '400'
-  }
-})
+      borderRadius: wp('2%'),
+      shadowColor: '#E5DEDE',
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+      elevation: 1.4
+    },
+    textSmile: {
+      marginTop: hp('0.5%'),
+      fontSize: hp('2%'),
+      fontWeight: '400'
+    }
+  })
+}
 
 export default LittleStars

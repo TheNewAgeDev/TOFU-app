@@ -32,7 +32,7 @@ const DragAndDrop = ({ answer, setAnswer }) => {
   )
 }
 
-const getStyles = theme => StyleSheet.create({
+const getStyles = (theme, isDark) => StyleSheet.create({
   mainContainer: {
     alignItems: 'center'
   },
@@ -44,14 +44,14 @@ const getStyles = theme => StyleSheet.create({
     marginTop: hp('3%'),
 
     borderRadius: wp('2%'),
-    shadowColor: '#00000080',
+    shadowColor: isDark ? '#ffffff80' : '#00000080',
     shadowOpacity: 0.2,
     shadowRadius: 1,
     elevation: 1
   },
   textResponse: {
     textAlign: 'center',
-    color: '#00000050'
+    color: isDark ? '#ffffff50' : '#00000050'
   },
   itemDrag: {
     width: wp('22%'),
@@ -71,7 +71,7 @@ const getStyles = theme => StyleSheet.create({
     height: hp('10%'),
 
     borderWidth: 1,
-    borderColor: '#00000010',
+    borderColor: isDark ? '#ffffff20' : '#00000010',
     borderRadius: 15
   },
   imageStyle: {

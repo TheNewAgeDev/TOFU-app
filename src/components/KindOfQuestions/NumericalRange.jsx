@@ -4,7 +4,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import Text from 'components/Styled/Text'
 
 import useTheme from 'hooks/useTheme'
-import { wp, hp } from 'utils'
+import { wp, hp, setOpacity } from 'utils'
 
 const Square = ({ num, keyPress, onPress }) => {
   const { styles } = useTheme(getStyles)
@@ -58,34 +58,36 @@ const NumericalRange = ({ answer, setAnswer }) => {
   )
 }
 
-const getStyles = theme => StyleSheet.create({
-  numbers: {
-    flexDirection: 'row',
-    marginTop: hp('2%')
-  },
-  contentNum: {
-    paddingVertical: hp('2%'),
-    paddingHorizontal: wp('5%'),
+const getStyles = (theme, isDark) => {
+  return StyleSheet.create({
+    numbers: {
+      flexDirection: 'row',
+      marginTop: hp('2%')
+    },
+    contentNum: {
+      paddingVertical: hp('2%'),
+      paddingHorizontal: wp('5%'),
 
-    marginHorizontal: wp('2%'),
-    borderRadius: wp('2%'),
-    shadowColor: '#414142',
-    shadowOpacity: 0.2,
-    shadowRadius: 1,
-    elevation: 1
-  },
-  contentPress: {
-    backgroundColor: '#EBEDF0'
-  },
-  textNum: {
-    fontSize: hp('2.8%'),
-    fontWeight: '300'
-  },
-  textDescription: {
-    marginTop: hp('3%'),
-    fontSize: hp('3%'),
-    fontWeight: '500'
-  }
-})
+      marginHorizontal: wp('2%'),
+      borderRadius: wp('2%'),
+      shadowColor: '#414142',
+      shadowOpacity: 0.2,
+      shadowRadius: 1,
+      elevation: 1
+    },
+    contentPress: {
+      backgroundColor: isDark ? setOpacity(theme.colors.primary, 60) : '#EBEDF0'
+    },
+    textNum: {
+      fontSize: hp('2.8%'),
+      fontWeight: '300'
+    },
+    textDescription: {
+      marginTop: hp('3%'),
+      fontSize: hp('3%'),
+      fontWeight: '500'
+    }
+  })
+}
 
 export default NumericalRange

@@ -14,12 +14,12 @@ import Text from 'components/Styled/Text'
 import { hp } from 'utils'
 
 const CardForm = () => {
-  const { styles, theme, isDark } = useTheme(getStyles)
+  const { styles, theme } = useTheme(getStyles)
   const [selectedProgram, setSelectedProgram] = useState('default')
 
   const { selectProgram, getPrograms } = useUser()
   const { status, statusMessage, setStatus } = useStatus()
-  const { black, white } = theme.colors
+  const { black } = theme.colors
 
   const programs = useSelector(state => state.user.programs.map((item, index) => {
     return {
@@ -27,8 +27,7 @@ const CardForm = () => {
       label: item.name,
       value: item.name,
       style: {
-        backgroundColor: theme.colors.backgroundPrimary,
-        color: isDark ? white : black
+        color: black
       }
     }
   }))
@@ -59,8 +58,7 @@ const CardForm = () => {
     label: 'Elija su programa',
     value: 'default',
     style: {
-      backgroundColor: theme.colors.backgroundPrimary,
-      color: isDark ? white : black
+      color: black
     }
   }
 
