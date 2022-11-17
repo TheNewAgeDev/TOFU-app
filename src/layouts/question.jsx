@@ -148,7 +148,8 @@ const getStyles = theme => StyleSheet.create({
   textEnd: {
     fontSize: hp('3%'),
     textAlign: 'center',
-    color: theme.colors.quaternary
+    color: setOpacity(theme.colors.white, 50),
+    marginBottom: hp('2%')
   },
   ImageStyles: {
     width: wp('35%'),

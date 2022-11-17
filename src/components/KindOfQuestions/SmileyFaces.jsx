@@ -133,9 +133,9 @@ const getStyles = (theme, isDark) => {
 
       borderRadius: wp('2%'),
       shadowColor: '#E5DEDE',
-      shadowOpacity: 0.2,
-      shadowRadius: 1,
-      elevation: 1.4
+      shadowOpacity: wp('0.1%'),
+      shadowRadius: wp('0.1%'),
+      elevation: wp('0.2%')
     },
     textSmile: {
       marginTop: hp('0.5%'),

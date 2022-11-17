@@ -70,10 +70,10 @@ const getStyles = (theme, isDark) => {
 
       marginHorizontal: wp('2%'),
       borderRadius: wp('2%'),
-      shadowColor: '#414142',
-      shadowOpacity: 0.2,
-      shadowRadius: 1,
-      elevation: 1
+      shadowColor: isDark ? '#686866' : '#414142',
+      shadowOpacity: wp('5%'),
+      shadowRadius: wp('2%'),
+      elevation: wp('0.2%')
     },
     contentPress: {
       backgroundColor: isDark ? setOpacity(theme.colors.primary, 60) : '#EBEDF0'
