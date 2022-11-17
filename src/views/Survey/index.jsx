@@ -25,13 +25,18 @@ const Survey = ({ route }) => {
   }
 
   const handleSubmit = async () => {
-    saveAnswer({ answer })
-    const prevAnswer = course.answers.find(answer => answer.num === (count + 1))
-    setAnswer(prevAnswer ? prevAnswer.value : null)
+    const currentAnswer = course.answers.find(answer => answer.num === count)
+    if (!currentAnswer || currentAnswer.value !== answer) saveAnswer({ answer })
+
+    const nextAnswer = course.answers.find(answer => answer.num === (count + 1))
+    setAnswer(nextAnswer ? nextAnswer.value : null)
     controllerCount.nextQuestion()
   }
 
   const handlePrev = async () => {
+    const currentAnswer = course.answers.find(answer => answer.num === count)
+    if (!currentAnswer || currentAnswer.value !== answer) saveAnswer({ answer })
+
     const prevAnswer = course.answers.find(answer => answer.num === (count - 1))
     setAnswer(prevAnswer ? prevAnswer.value : null)
     controllerCount.prevQuestion()
