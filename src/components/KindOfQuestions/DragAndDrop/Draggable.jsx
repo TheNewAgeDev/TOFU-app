@@ -21,8 +21,9 @@ const isInDropZone = ({ pageX, pageY, styles, moveX, moveY }) => {
 const Draggable = ({
   contentPan, image, text, value, style, styles, keyPress, handlePress
 }) => {
-  const [stateDrag] = useState({
-    opacity: new Animated.Value(0.9)
+  const [stateDrag, setStateDrag] = useState({
+    opacity: new Animated.Value(0.9),
+    isBorderer: true
   })
 
   useEffect(() => {
@@ -41,7 +42,10 @@ const Draggable = ({
         })
       })
 
-      return
+      return setStateDrag(drag => ({
+        ...drag,
+        isBorderer: false
+      }))
     }
 
     Animated.spring(
@@ -51,6 +55,11 @@ const Draggable = ({
         useNativeDriver: false
       }
     ).start()
+
+    setStateDrag(drag => ({
+      ...drag,
+      isBorderer: true
+    }))
   }, [keyPress])
 
   const pan = useRef(new Animated.ValueXY()).current
@@ -96,6 +105,7 @@ const Draggable = ({
 
   const panStyle = {
     ...style,
+    borderWidth: stateDrag.isBorderer ? 1 : 0,
     transform: pan.getTranslateTransform()
   }
 

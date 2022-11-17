@@ -47,7 +47,7 @@ const getStyles = (theme, isDark) => StyleSheet.create({
     shadowColor: isDark ? '#ffffff80' : '#00000080',
     shadowOpacity: 0.2,
     shadowRadius: 1,
-    elevation: 1
+    elevation: wp('0.2%')
   },
   textResponse: {
     textAlign: 'center',
@@ -69,8 +69,6 @@ const getStyles = (theme, isDark) => StyleSheet.create({
     alignItems: 'center',
     width: wp('22%'),
     height: hp('10%'),
-
-    borderWidth: 1,
     borderColor: isDark ? '#ffffff20' : '#00000010',
     borderRadius: 15
   },
